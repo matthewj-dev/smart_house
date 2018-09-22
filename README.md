@@ -4,6 +4,7 @@
 # How to Set Up
 1. Install [Node.js](https://nodejs.org/en/download/current/)
 1. Run `npm install`
+1. Run `node index.js`
 1. Open browser and go to [http://localhost:8080] to see the app!
 
 * Make sure to set up ssh tunnel or local PostgreSQL database to use database stuff. To set up the tunnel (for port 5433) use:
