@@ -1,1 +1,4 @@
 node_modules
+.idea
+.vscode
+cfg/config_override.js

@@ -1,10 +1,12 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const mustache = require('mustache-express');
+const { Client } = require('pg')
+const config = require('./cfg/config_default');
+const app = express();
 
-var mustacheExpress = require('mustache-express');
-app.engine('html', mustacheExpress());
+app.engine('html', mustache());
 app.set('view engine', 'html');
-app.set('views', __dirname + '/views');
+app.set('views', __dirname + config.http.views);
 
 // set up static files server (client-side js, css, images, etc.)
 app.use(express.static('public'));
@@ -14,13 +16,12 @@ app.use(express.static('public'));
     EXPRESS SERVER IS NOW SET UP :)
     BELOW I'LL SET UP DATABASE CONNECTION
 */
-const { Client } = require('pg');
 const client = new Client({
-    user: 'bduboseweb',
-    host: 'localhost', // really cisdb, going through tunnel
-    database: 'bdubose',
-    password: 'bduboseweb',
-    port: 5433 // this is not the default postgres port (5432), going through tunnel
+    host: config.db.host,
+    port: config.db.port,    
+    database: config.db.dbname,
+    user: config.db.user,
+    password: config.db.password
 });
 
 
@@ -60,5 +61,4 @@ app.get('/dbtest', (req, res) => {
     });
 });
 
-var port = 8080;
-app.listen(port, () => console.log(`Listening on port ${port}...`));
+app.listen(config.http.port, () => console.log(`Listening on port ${config.http.port}...`));
