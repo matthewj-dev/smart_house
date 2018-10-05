@@ -1,3 +1,4 @@
+
 drop table if exists room;
 create table if not exists room
 ( room_id   serial not null
