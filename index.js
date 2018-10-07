@@ -1,6 +1,6 @@
 const express = require('express');
 const mustache = require('mustache-express');
-const { Client } = require('pg')
+const db = require('./db/db');
 const config = require('./cfg/config_default');
 const app = express();
 
@@ -10,22 +10,6 @@ app.set('views', __dirname + config.http.views);
 
 // set up static files server (client-side js, css, images, etc.)
 app.use(express.static('public'));
-
-
-/*
-    EXPRESS SERVER IS NOW SET UP :)
-    BELOW I'LL SET UP DATABASE CONNECTION
-*/
-const client = new Client({
-    host: config.db.host,
-    port: config.db.port,    
-    database: config.db.dbname,
-    user: config.db.user,
-    password: config.db.password
-});
-
-
-
 
 // root or /name of app
 app.get('/', (req, res) => {
@@ -41,23 +25,18 @@ app.get('/hello/:name', (req, res) => {
 
 // test for database access
 app.get('/dbtest', (req, res) => {
-    client.connect()  // connect to db
-    const rs = client.query('select id, val from smarthouse.test', (err, rs) => {
-        // render template with result set (rs)
-        // rs looks like:
-        /*
-            [
-                {
-                    "id": 1,
-                    "val": "hello"
-                },
-                {
-                    "id": 2,
-                    "val": "world"
-                }
-            ]
-        */
-        res.render('dbtest.html', rs);
+    db.query(`
+    select *
+    from
+    ( values
+      (1, $1::int)
+    , (2, $2)
+    ) x(id, val)
+    `, 'hello', 'world'
+    ).then((model) => {
+        res.render('dbtest.html', model);
+    }).catch((err) => {
+        res.send(`${err}`);
     });
 });
 
