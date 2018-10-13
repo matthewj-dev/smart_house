@@ -1,5 +1,5 @@
 body {
-  background-color: #FFCC00;
+  background-color: #808285;
   padding: 20px;
   margin: 0;
 }
@@ -12,7 +12,7 @@ ul.header li {
   margin: 0;
 }
 ul.header {
-  background-color: #111;
+  background-color: #295135;
   padding: 0;
 }
 ul.header li a {
@@ -35,5 +35,5 @@ ul.header li a {
 }
 
 .active {
-    background-color: #0099FF;
+    background-color: #1E6B52;
 }
