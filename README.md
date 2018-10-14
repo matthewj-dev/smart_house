@@ -5,8 +5,8 @@
 1. Make a new file called *config_override.js* in *src/cfg* and copy the contents of *config_override_example.js* replacing username and password with yours. 
 1. Install [Node.js](https://nodejs.org/en/download/current/)
 1. Run `npm install`
-1. Run `sudo npm install -g nodemon`
-1. Run `nodemon server.js`
+1. Run `sudo npm install -g nodemon` _OPTIONAL_
+1. Run `node server.js` or `nodemon server.js` (Scans for changes)
 1. Run `npm start`
 1. Open browser and go to [http://localhost:8080] to see server responses.
 
