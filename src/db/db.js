@@ -25,7 +25,7 @@ module.exports.query = async (query, ...args) => {
     try {
         client = new Client(connParams);
         client.connect();
-        return await client.query(query, args);
+        return (await client.query(query, args)).rows;
     }
     catch (err) {
         console.error(`Error querying database! ${err} Query: ${query} Args: ${args}`);
