@@ -1,5 +1,5 @@
 node_modules
 .idea
 .vscode
-cfg/config_override.js
 \.DS_Store
+src/cfg/config_override.js
