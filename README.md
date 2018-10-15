@@ -6,6 +6,9 @@
 1. Install [Node.js](https://nodejs.org/en/download/current/)
 1. Run `npm install`
 1. Run `sudo npm install -g nodemon`
+
+# How to Run the App
+1. Run `ssh -L 5433:cisdb:5432 blazerid@moat.cis.uab.edu
 1. Run `nodemon server.js`
 1. Run `npm start`
 1. Open browser and go to [http://localhost:8080] to see server responses.
