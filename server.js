@@ -1,8 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser')
 const path = require('path');
-const db = require('./src/db/db');
-const config = require('./src/cfg/config_default');
+const db = require('./db/db');
 const app = express();
 
 app.use(express.static(path.join(__dirname, '/public')));
@@ -29,5 +28,5 @@ app.get('/getRoomList', (req, res) => {
 app.get('*', (req,res) =>{
     res.sendFile(path.join(__dirname+'/public/index.html'));
 });
-const myPort = process.env.PORT || config.http.port;
+const myPort = process.env.PORT || 8080;
 app.listen(myPort, () => console.log(`Listening on port ${myPort}...`));

@@ -1,12 +1,11 @@
 const { Client } = require('pg')
-const config = require('../cfg/config_default');
 
 const connParams = {
-    host: config.db.host,
-    port: config.db.port,    
-    database: config.db.dbname,
-    user: config.db.user,
-    password: config.db.password
+    host: "localhost",
+    port: 5433,    
+    database: "capstone_team1",
+    user: "jbarbazeweb",
+    password: "jbarbazeweb"
 };
 
 /**
