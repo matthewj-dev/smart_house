@@ -3,7 +3,7 @@ const { Client } = require('pg')
 const connParams = {
     host: "localhost",
     port: 5433,    
-    database: "capstone_team1",
+    database: "jbarbaze",
     user: "jbarbazeweb",
     password: "jbarbazeweb"
 };

@@ -45,10 +45,3 @@ create table if not exists temperature
 , val             int -- might need to be a double?
 , constraint pk_temperature primary key (temperature_id) using index tablespace pg_default
 );
-
-grant all on all tables in schema public to bdubose;
-grant all on all tables in schema public to jvance93;
-grall all on all tables in schema public to jbarbaze;
-grant all on all tables in schema public to matthewj;
-grant all on all tables in schema public to kush96;
-grant all on all tables in schema public to redc;
