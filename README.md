@@ -3,7 +3,6 @@
 
 # How to Set Up 
 This only needs to be run once to set up your environment.
-1. Make a new file called *config_override.js* in *src/cfg* and copy the contents of *config_override_example.js* replacing username and password with yours. 
 1. Install [Node.js](https://nodejs.org/en/download/current/)
 1. Run `npm install`
 1. Run `sudo npm install -g nodemon`
