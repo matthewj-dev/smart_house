@@ -9,6 +9,7 @@ import './App.css';
 import Hello from './pages/Hello';
 import List from './pages/List';
 import RoomList from './pages/RoomList';
+import WelcomeTest from './pages/WelcomeTest';
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
                     <li><NavLink exact to="/">Home</NavLink></li>
                     <li><NavLink to='/list'>List</NavLink></li>
                     <li><NavLink to='/roomList'>Room List</NavLink></li>
+                    <li><NavLink to='/test'>Welcome Test</NavLink></li>
                 </ul>
                 <div className="content">
                     <Switch>
@@ -27,6 +29,9 @@ class App extends Component {
                         <Route path='/list' component={List}/>
                         <Route path='/roomList' component={RoomList}/>
                     </Switch>
+                </div>
+                <div>
+                    <Route path='/test' component={WelcomeTest}/>
                 </div>
             </div>
         </HashRouter>
