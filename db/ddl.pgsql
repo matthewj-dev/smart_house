@@ -11,7 +11,7 @@ create table if not exists obj
 ( obj_id     serial not null
 , room_id    int    not null
 , obj_name   text   not null
-, watts      int    not null -- maybe double later
+, watts      int    null -- can be null for things like doors
 , is_on_open boolean default false -- is this thing on/off, open/closed? guess I'll leave this nullable for now
 , constraint pk_obj primary key (obj_id) using index tablespace pg_default
 , constraint fk_obj_1 foreign key (room_id) references room(room_id) on delete cascade   
