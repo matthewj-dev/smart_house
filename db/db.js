@@ -1,12 +1,11 @@
 const { Client } = require('pg')
-const config = require('../cfg/config_default');
 
 const connParams = {
-    host: config.db.host,
-    port: config.db.port,    
-    database: config.db.dbname,
-    user: config.db.user,
-    password: config.db.password
+    host: "localhost",
+    port: 5433,    
+    database: "jbarbaze",
+    user: "jbarbazeweb",
+    password: "jbarbazeweb"
 };
 
 /**
@@ -25,7 +24,7 @@ module.exports.query = async (query, ...args) => {
     try {
         client = new Client(connParams);
         client.connect();
-        return await client.query(query, args);
+        return (await client.query(query, args)).rows;
     }
     catch (err) {
         console.error(`Error querying database! ${err} Query: ${query} Args: ${args}`);

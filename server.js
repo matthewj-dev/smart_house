@@ -1,8 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser')
 const path = require('path');
-const db = require('./src/db/db');
-const config = require('./src/cfg/config_default');
+const db = require('./db/db');
 const app = express();
 
 app.use(express.static(path.join(__dirname, '/public')));
@@ -13,25 +12,21 @@ app.get('/getList', (req,res) => {
     console.log('Sent list of items');
 });
 
-app.get('*', (req,res) =>{
-    res.sendFile(path.join(__dirname+'/public/index.html'));
-});
-
 // test for database access
-app.get('./src/db/db.js', (req, res) => {
+app.get('/getRoomList', (req, res) => {
     db.query(`
     select *
-    from
-    ( values
-      (1, $1::int)
-    , (2, $2)
-    ) x(id, val)
-    `, 'hello', 'world'
+    from room
+    `,
     ).then((model) => {
-        // res.render('dbtest.html', model);
+        res.json(model)
     }).catch((err) => {
         // res.send(`${err}`);
     });
 });
-const myPort = process.env.PORT || config.http.port;
+
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/public/index.html'));
+});
+const myPort = process.env.PORT || 8080;
 app.listen(myPort, () => console.log(`Listening on port ${myPort}...`));
