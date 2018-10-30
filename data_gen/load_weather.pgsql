@@ -9,10 +9,13 @@ create table stage
 
 insert into temperature (temp_time, is_outside_temp, val)
 select
-  ('2010-' || "DATE")::timestamptz
+  ('2018-' || "DATE")::timestamptz
 , true
 , "HLY-TEMP-NORMAL"
 from stage
+on conflict do nothing
 ;
 
+
 drop table stage;
+

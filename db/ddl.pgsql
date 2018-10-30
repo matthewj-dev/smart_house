@@ -39,9 +39,8 @@ create table if not exists power_bill
 
 drop table if exists temperature cascade;
 create table if not exists temperature
-( temperature_id  serial
-, temp_time       timestamptz
+( temp_time       timestamptz
 , is_outside_temp boolean
 , val             int -- might need to be a double?
-, constraint pk_temperature primary key (temperature_id) using index tablespace pg_default
+, constraint pk_temperature primary key (temp_time, is_outside_temp) using index tablespace pg_default
 );
