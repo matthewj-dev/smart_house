@@ -19,9 +19,6 @@ returns void as $$
     on o.obj_name = 'refrigerator'
 $$ language sql volatile;
 
-select gen_fridge();
-select * from power_consumption;
-
 create or replace function get_power_bill
 ( _rng tstzrange default tstzrange(current_date - interval '1 month', current_date)
 )
@@ -31,7 +28,7 @@ as $$
     (
         select
           extract(epoch from sum(duration))/60/60 as total_hours
-        , (sum(watts)/1000) as total_kw
+        , (sum(distinct watts)/1000) as total_kw
         from power_consumption pc
         where _rng @> pc.time_used
     )
@@ -42,12 +39,9 @@ as $$
     )
     select
       _rng
-    , 0.12 * total_kw * total_hours -- 0.12 is constant electricity cost
-    , total_kw * total_hours
+    , sum(0.12 * total_kw * total_hours) -- 0.12 is constant electricity cost
+    , sum(total_kw * total_hours)
     from agg
     returning *
     ;
 $$ language sql volatile;
-
-select * from get_power_bill();
-select * from power_bill;
