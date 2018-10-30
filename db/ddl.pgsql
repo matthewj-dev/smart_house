@@ -22,8 +22,9 @@ drop table if exists power_consumption cascade;
 create table if not exists power_consumption
 ( power_consumption_id serial
 , obj_id               int
+, time_used            timestamptz
 , duration             interval
-, watth                numeric  -- calculated and cached
+, watts                numeric  -- calculated and cached
 , constraint pk_power_consumption primary key (power_consumption_id) using index tablespace pg_default
 , constraint fk_power_consumption_1 foreign key (obj_id) references obj(obj_id) on delete cascade
 );
