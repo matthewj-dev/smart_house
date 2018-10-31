@@ -23,6 +23,7 @@ import myList from '../../pages/List';
 import RoomList from '../../pages/RoomList';
 import WelcomePage from '../../pages/WelcomeTest';
 import AdminPage from '../../pages/AdminPage';
+import FinancialPage from '../../pages/Financial';
 
 const drawerWidth = 240;
 
@@ -137,6 +138,7 @@ class ResponsiveDrawer extends React.Component {
               <HashRouter>
                     <Switch>
                         <Route exact path="/" component={Hello} />
+                        <Route path='/financial' component={FinancialPage} />>
                         <Route path='/list' component={myList} />
                         <Route path='/roomList' component={RoomList} />
                         <Route path='/adminPage' component={AdminPage} />

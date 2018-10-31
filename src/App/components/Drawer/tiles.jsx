@@ -28,6 +28,16 @@ export const mailFolderListItems = (
             <ListItemText primary="Home" />
             </ListItem>
         </NavLink>
+        
+        <NavLink to='/financial'>
+            <ListItem button>
+                <ListItemIcon>
+                    <ReportIcon/>>
+                </ListItemIcon>
+                <ListItemText primary='Financial'/>
+            </ListItem>
+        </NavLink>
+
         <NavLink to="/List">
             <ListItem button>
             <ListItemIcon>
