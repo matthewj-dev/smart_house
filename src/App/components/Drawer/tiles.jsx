@@ -13,14 +13,13 @@ import DraftsIcon from '@material-ui/icons/Drafts';
 import StarIcon from '@material-ui/icons/Star';
 import SendIcon from '@material-ui/icons/Send';
 import MailIcon from '@material-ui/icons/Mail';
-import DeleteIcon from '@material-ui/icons/Delete';
 import ReportIcon from '@material-ui/icons/Report';
 
 export const mailFolderListItems = (
   <div>
       <HashRouter>
           <div>
-              <NavLink exact to="/">
+              <NavLink exact to="/" style={{ textDecoration: 'none' }}>
             <ListItem button>
             <ListItemIcon>
                 <InboxIcon />
@@ -29,24 +28,34 @@ export const mailFolderListItems = (
             </ListItem>
         </NavLink>
         
-        <NavLink to='/financial'>
+        <NavLink to='/financial' style={{ textDecoration: 'none' }}>
             <ListItem button>
                 <ListItemIcon>
-                    <ReportIcon/>>
+                    <ReportIcon/>
                 </ListItemIcon>
                 <ListItemText primary='Financial'/>
             </ListItem>
         </NavLink>
 
-        <NavLink to="/List">
+        <NavLink to="/List" style={{ textDecoration: 'none' }}>
             <ListItem button>
-            <ListItemIcon>
-                <StarIcon />
-            </ListItemIcon>
-            <ListItemText primary="List" />
+                <ListItemIcon>
+                    <StarIcon />
+                </ListItemIcon>
+                <ListItemText primary="List" />
             </ListItem>
         </NavLink>
-        <NavLink to='/roomList'>
+
+        <NavLink exact to="/hello" style={{ textDecoration: 'none' }}>
+            <ListItem button>
+                <ListItemIcon>
+                    <InboxIcon />
+                </ListItemIcon>
+                <ListItemText primary="HelloWorld" />
+            </ListItem>
+        </NavLink>
+
+        <NavLink to='/roomList' style={{ textDecoration: 'none' }}>
         <ListItem button>
         <ListItemIcon>
             <SendIcon />
@@ -54,7 +63,7 @@ export const mailFolderListItems = (
         <ListItemText primary="Room List" />
         </ListItem>
         </NavLink>
-        <NavLink to='/test'>
+        <NavLink to='/test' style={{ textDecoration: 'none' }}>
         <ListItem button>
         <ListItemIcon>
             <DraftsIcon />
@@ -73,7 +82,7 @@ export const mailFolderListItems = (
 export const otherMailFolderListItems = (
   <div>
       <HashRouter>
-          <NavLink to='adminPage'>
+          <NavLink to='adminPage' style={{ textDecoration: 'none' }}>
         <ListItem button>
         <ListItemIcon>
             <MailIcon />
@@ -82,19 +91,6 @@ export const otherMailFolderListItems = (
         </ListItem>
       </NavLink>
       </HashRouter>
-      
-    
-    {/* <ListItem button>
-      <ListItemIcon>
-        <DeleteIcon />
-      </ListItemIcon>
-      <ListItemText primary="Trash" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <ReportIcon />
-      </ListItemIcon>
-      <ListItemText primary="Spam" />
-    </ListItem> */}
+
   </div>
 );

@@ -6,7 +6,9 @@ import Drawer from './components/Drawer/Drawer';
 class App extends Component {
   render() {
     return (
+      <div>
         <Drawer/>
+      </div>
     );
   }
 }

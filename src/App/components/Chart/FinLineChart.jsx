@@ -6,8 +6,6 @@ import XAxis from 'recharts/lib/cartesian/XAxis';
 import YAxis from 'recharts/lib/cartesian/YAxis';
 import CartesianGrid from 'recharts/lib/cartesian/CartesianGrid';
 import Tooltip from 'recharts/lib/component/Tooltip';
-import Legend from 'recharts/lib/component/Legend';
-
 const data = [
   { name: 'Jan', Bill: 200 },
   { name: 'Feb', Bill: 280 },
@@ -32,9 +30,7 @@ function SimpleLineChart() {
         <YAxis />
         <CartesianGrid vertical={false} strokeDasharray="3 3" />
         <Tooltip formatter={(value) => new Intl.NumberFormat('en', { style: 'currency', currency: 'USD' }).format(value)}/>
-        {/* <Legend /> */}
         <Line type="monotone" dataKey="Bill" stroke="#82ca9d" />
-        {/* <Line type="monotone" dataKey="Orders" stroke="#8884d8" activeDot={{ r: 8 }} /> */}
       </LineChart>
     </ResponsiveContainer>
   );
