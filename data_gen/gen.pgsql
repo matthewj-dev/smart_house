@@ -22,26 +22,22 @@ $$ language sql volatile;
 create or replace function get_power_bill
 ( _rng tstzrange default tstzrange(current_date - interval '1 month', current_date)
 )
-returns power_bill
+returns double precision
 as $$
-    with agg as
-    (
-        select
-          extract(epoch from sum(duration))/60/60 as total_hours
-        , (sum(distinct watts)/1000) as total_kw
-        from power_consumption pc
-        where _rng @> pc.time_used
-    )
-    insert into power_bill
-    ( period
-    , amount
-    , kwh
-    )
-    select
-      _rng
-    , sum(0.12 * total_kw * total_hours) -- 0.12 is constant electricity cost
-    , sum(total_kw * total_hours)
-    from agg
-    returning *
+    select 
+      0.12 * sum((watts/1000) * extract(epoch from duration)/60/60)
+    from power_consumption pc
+    where _rng @> pc.time_used
     ;
 $$ language sql volatile;
+
+/*
+
+select json_agg
+( json_build_object
+  ( 'name', to_char(m, 'Mon')
+  , 'bill', get_power_bill(tstzrange(m, m + interval '1 month'))
+  )
+)
+from generate_series('2018-01-01', '2018-12-31', interval '1 month') m;
+*/

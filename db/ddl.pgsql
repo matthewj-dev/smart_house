@@ -29,6 +29,10 @@ create table if not exists power_consumption
 , constraint fk_power_consumption_1 foreign key (obj_id) references obj(obj_id) on delete cascade
 );
 
+/*
+No use in trying to cache this. Due to changes,
+we'll probably have to calc every time.
+Except maybe for ranges completely in the past.
 drop table if exists power_bill cascade;
 create table if not exists power_bill
 ( power_bill_id serial
@@ -37,6 +41,7 @@ create table if not exists power_bill
 , kwh           numeric
 , constraint pk_power_bill primary key (power_bill_id) using index tablespace pg_default
 );
+*/
 
 drop table if exists temperature cascade;
 create table if not exists temperature
