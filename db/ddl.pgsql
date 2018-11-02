@@ -29,8 +29,19 @@ create table if not exists power_consumption
 , constraint pk_power_consumption primary key (power_consumption_id) using index tablespace pg_default
 , constraint fk_power_consumption_1 foreign key (obj_id) references obj(obj_id) on delete cascade
 );
+create index if not exists ix_power_consumption_1 on power_consumption(time_used);
 
--- TODO: Add tables to track
+
+drop table if exists water_consumption cascade;
+create table if not exists water_consumption
+( water_consumption_id serial
+, obj_id               int
+, time_used            timestamptz
+, gallons              numeric
+, constraint pk_water_consumption primary key (water_consumption_id) using index tablespace pg_default
+, constraint fk_water_consumption foreign key (obj_id) references obj(obj_id) on delete cascade
+);
+create index if not exists ix_water_consumption_1 on water_consumption(time_used);
 
 /*
 No use in trying to cache this. Due to changes,
