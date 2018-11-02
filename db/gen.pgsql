@@ -30,14 +30,3 @@ as $$
     where _rng @> pc.time_used
     ;
 $$ language sql volatile;
-
-/*
-
-select json_agg
-( json_build_object
-  ( 'name', to_char(m, 'Mon')
-  , 'bill', get_power_bill(tstzrange(m, m + interval '1 month'))
-  )
-)
-from generate_series('2018-01-01', '2018-12-31', interval '1 month') m;
-*/

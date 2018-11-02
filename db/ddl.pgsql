@@ -12,6 +12,7 @@ create table if not exists obj
 , room_id    int    not null
 , obj_name   text   not null
 , watts      int    null -- can be null for things like doors
+, gallons    int    null -- can be null for things that don't need water
 , is_on_open boolean default false -- is this thing on/off, open/closed? guess I'll leave this nullable for now
 , constraint pk_obj primary key (obj_id) using index tablespace pg_default
 , constraint fk_obj_1 foreign key (room_id) references room(room_id) on delete cascade   
@@ -28,6 +29,8 @@ create table if not exists power_consumption
 , constraint pk_power_consumption primary key (power_consumption_id) using index tablespace pg_default
 , constraint fk_power_consumption_1 foreign key (obj_id) references obj(obj_id) on delete cascade
 );
+
+-- TODO: Add tables to track
 
 /*
 No use in trying to cache this. Due to changes,
