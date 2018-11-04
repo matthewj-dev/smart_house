@@ -15,18 +15,28 @@ const styles = theme => ({
   },
 });
 
-const options = [
-  'Living Room',
-  'Kitchen',
-  'Bathroom',
-  'Bedroom',
-];
-
 class RoomSwitcher extends React.Component {
   state = {
     anchorEl: null,
     selectedIndex: 1,
+    rooms: [],
   };
+
+  componentDidMount() {
+    this.getRooms();
+  }
+
+  getRooms = () => {
+    fetch('/getRoomList')
+    .then(res => res.json())
+    .then(rooms => {
+      var myRooms = [];
+      rooms.forEach((element) => {
+        myRooms.push(element.room_name);
+      });
+      this.setState({ rooms: myRooms })
+    });
+  }
 
   handleClickListItem = event => {
     this.setState({ anchorEl: event.currentTarget });
@@ -43,6 +53,7 @@ class RoomSwitcher extends React.Component {
   render() {
     const { classes } = this.props;
     const { anchorEl } = this.state;
+    const { rooms } = this.state;
 
     return (
       <div className={classes.root}>
@@ -51,12 +62,12 @@ class RoomSwitcher extends React.Component {
             button
             aria-haspopup="true"
             aria-controls="lock-menu"
-            aria-label="When device is locked"
+            aria-label="Room Selector"
             onClick={this.handleClickListItem}
           >
             <ListItemText
-              primary="When device is locked"
-              secondary={options[this.state.selectedIndex]}
+              primary="Room Selector"
+              secondary={rooms[this.state.selectedIndex]}
             />
           </ListItem>
         </List>
@@ -66,7 +77,7 @@ class RoomSwitcher extends React.Component {
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
         >
-          {options.map((option, index) => (
+          {rooms.map((option, index) => (
             <MenuItem
               key={option}
               disabled={index === 0}
