@@ -6,23 +6,50 @@ import XAxis from 'recharts/lib/cartesian/XAxis';
 import YAxis from 'recharts/lib/cartesian/YAxis';
 import CartesianGrid from 'recharts/lib/cartesian/CartesianGrid';
 import Tooltip from 'recharts/lib/component/Tooltip';
-const data = [
-  { name: 'Jan', Bill: 200 },
-  { name: 'Feb', Bill: 280 },
-  { name: 'Mar', Bill: 140 },
-  { name: 'Apr', Bill: 165 },
-  { name: 'May', Bill: 110 },
-  { name: 'Jun', Bill: 90 },
-  { name: 'Jul', Bill: 130 },
-  { name: 'Aug', Bill: 128 },
-  { name: 'Sept', Bill: 120 },
-  { name: 'Oct', Bill: 200 },
-  { name: 'Nov', Bill: 280 },
-  { name: 'Dec', Bill: 180 },
+
+const tempData = [
+  // { name: 'Jan', bill: 13.3920000000002 },
+  // { name: 'Feb', bill: 72.3920000000002 },
+  // { name: 'Mar', bill: 25.3920000000002 },
+  // { name: 'Apr', bill: 13.3920000000002 },
+  // { name: 'May', bill: 28.3920000000002 },
+  // { name: 'Jun', bill: 10.3920000000002 },
+  // { name: 'Jul', bill: 13.3920000000002 },
+  // { name: 'Aug', bill: 45.3920000000002 },
+  // { name: 'Sept', bill: 18.3920000000002 },
+  // { name: 'Oct', bill: 19.3920000000002 },
+  // { name: 'Nov', bill: 0 },
+  // { name: 'Dec', bill: 40.3920000000002 },
 ];
 
-function SimpleLineChart() {
-  return (
+class SimpleLineChart extends React.Component {
+
+  state = {
+    data: [],
+  };
+
+  componentDidMount() {
+    this.getData();
+  }
+
+  getData = () => {
+    fetch('/getMonthlyBilling')
+    .then(res => res.json())
+    .then(data => {this.setState({ data })});
+  }
+
+  render() {
+    var { data } = this.state;
+
+    // check for test data
+    if (tempData.length) {
+
+      data = tempData;
+
+    }
+    console.log(data);
+
+    return (
     // 99% per https://github.com/recharts/recharts/issues/172
     <ResponsiveContainer width="99%" height={320}>
       <LineChart data={data}>
@@ -30,10 +57,12 @@ function SimpleLineChart() {
         <YAxis />
         <CartesianGrid vertical={false} strokeDasharray="3 3" />
         <Tooltip formatter={(value) => new Intl.NumberFormat('en', { style: 'currency', currency: 'USD' }).format(value)}/>
-        <Line type="monotone" dataKey="Bill" stroke="#82ca9d" />
+        <Line type="monotone" dataKey="bill" stroke="#82ca9d" />
       </LineChart>
     </ResponsiveContainer>
   );
+  }
+  
 }
 
 export default SimpleLineChart;
