@@ -29,6 +29,13 @@ app.get("/getRoomList", (req, res) => {
     });
 });
 
+app.get("/getMonthlyBilling", (req, res) => {
+  db.monthlyBilling()
+  .then(model => {
+    res.json(model);
+  });
+});
+
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/public/index.html"));
 });
