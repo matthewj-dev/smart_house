@@ -19,18 +19,34 @@ const connParams = {
  * @returns {Array} Array of rows returned by query, generally of the form:
  * `[{"col": val, "col2":val}, {}...]`
  */
-module.exports.query = async (query, ...args) => {
-    let client;
-    try {
-        client = new Client(connParams);
-        client.connect();
-        return (await client.query(query, args)).rows;
+module.exports = {
+    query: async (query, ...args) => {
+        let client;
+        try {
+            client = new Client(connParams);
+            client.connect();
+            return (await client.query(query, args)).rows;
+        }
+        catch (err) {
+            console.error(`Error querying database! ${err} Query: ${query} Args: ${args}`);
+            throw new Error(err); // rethrow the error so it can be caught in the Promise chain
+        } finally {
+            client.end();
+        }
+    },
+
+    monthlyBilling: async () => {
+        let client;
+        try {
+            client = new Client(connParams);
+            client.connect();
+            return (await client.query('select * from monthly_billing')).rows[0].model;
+        } catch(err) {
+            console.error(`Error retriving monthly billing data! ${err}`);
+            throw new Error(err);
+        } finally {
+            client.end();
+        }
     }
-    catch (err) {
-        console.error(`Error querying database! ${err} Query: ${query} Args: ${args}`);
-        throw new Error(err); // rethrow the error so it can be caught in the Promise chain
-    } finally {
-        client.end();
-    }
-};
+}
 
