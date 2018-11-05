@@ -12,6 +12,7 @@ create table if not exists obj
 , room_id    int    not null
 , obj_name   text   not null
 , watts      int    null -- can be null for things like doors
+, gallons    int    null -- can be null for things that don't need water
 , is_on_open boolean default false -- is this thing on/off, open/closed? guess I'll leave this nullable for now
 , constraint pk_obj primary key (obj_id) using index tablespace pg_default
 , constraint fk_obj_1 foreign key (room_id) references room(room_id) on delete cascade   
@@ -22,12 +23,30 @@ drop table if exists power_consumption cascade;
 create table if not exists power_consumption
 ( power_consumption_id serial
 , obj_id               int
+, time_used            timestamptz
 , duration             interval
-, watth                numeric  -- calculated and cached
+, watts                numeric  -- calculated and cached
 , constraint pk_power_consumption primary key (power_consumption_id) using index tablespace pg_default
 , constraint fk_power_consumption_1 foreign key (obj_id) references obj(obj_id) on delete cascade
 );
+create index if not exists ix_power_consumption_1 on power_consumption(time_used);
 
+
+drop table if exists water_consumption cascade;
+create table if not exists water_consumption
+( water_consumption_id serial
+, obj_id               int
+, time_used            timestamptz
+, gallons              numeric
+, constraint pk_water_consumption primary key (water_consumption_id) using index tablespace pg_default
+, constraint fk_water_consumption foreign key (obj_id) references obj(obj_id) on delete cascade
+);
+create index if not exists ix_water_consumption_1 on water_consumption(time_used);
+
+/*
+No use in trying to cache this. Due to changes,
+we'll probably have to calc every time.
+Except maybe for ranges completely in the past.
 drop table if exists power_bill cascade;
 create table if not exists power_bill
 ( power_bill_id serial
@@ -36,12 +55,12 @@ create table if not exists power_bill
 , kwh           numeric
 , constraint pk_power_bill primary key (power_bill_id) using index tablespace pg_default
 );
+*/
 
 drop table if exists temperature cascade;
 create table if not exists temperature
-( temperature_id  serial
-, temp_time       timestamptz
+( temp_time       timestamptz
 , is_outside_temp boolean
 , val             int -- might need to be a double?
-, constraint pk_temperature primary key (temperature_id) using index tablespace pg_default
+, constraint pk_temperature primary key (temp_time, is_outside_temp) using index tablespace pg_default
 );
