@@ -41,8 +41,8 @@ class ControlledExpansionPanels extends React.Component {
       <div className={classes.root}>
         <ExpansionPanel expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes.heading}>General settings</Typography>
-            <Typography className={classes.secondaryHeading}>I am an expansion panel</Typography>
+            <Typography className={classes.heading}>Simulation settings</Typography>
+            <Typography className={classes.secondaryHeading}>I am an example panel</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Typography>
@@ -53,9 +53,9 @@ class ControlledExpansionPanels extends React.Component {
         </ExpansionPanel>
         <ExpansionPanel expanded={expanded === 'panel2'} onChange={this.handleChange('panel2')}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes.heading}>Users</Typography>
+            <Typography className={classes.heading}>Theme</Typography>
             <Typography className={classes.secondaryHeading}>
-              You are currently not an owner
+              You are currently not an admin
             </Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
@@ -81,7 +81,7 @@ class ControlledExpansionPanels extends React.Component {
         </ExpansionPanel>
         <ExpansionPanel expanded={expanded === 'panel4'} onChange={this.handleChange('panel4')}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes.heading}>Personal data</Typography>
+            <Typography className={classes.heading}>Personal Settings</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Typography>

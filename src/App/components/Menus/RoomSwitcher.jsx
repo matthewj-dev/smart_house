@@ -16,16 +16,19 @@ const styles = theme => ({
 });
 
 class RoomSwitcher extends React.Component {
+  // set state variables
   state = {
     anchorEl: null,
     selectedIndex: 1,
     rooms: [],
   };
 
+  // on mount get room list
   componentDidMount() {
     this.getRooms();
   }
 
+  // get room list and extract the name strings
   getRooms = () => {
     fetch('/getRoomList')
     .then(res => res.json())
