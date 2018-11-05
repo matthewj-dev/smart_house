@@ -6,7 +6,7 @@ const style = {
   width: "33.3%",
   float: "left",
   margin: "0 auto",
-  marginTop: "440px",
+  marginTop: "200px",
   backgroundColor: "green",
   font: "inherit",
   border: "1px solid black",
