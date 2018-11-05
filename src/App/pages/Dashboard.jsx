@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import RoomSwitcher from '../components/Menus/RoomSwitcher';
+import RoomPaper from '../components/Sheets/BasicSheet';
 import './Style/Dashboard.css'
 
 class Financial extends Component {
@@ -7,7 +7,7 @@ class Financial extends Component {
       return (
       <div>
           <div className='bottom'>
-              <RoomSwitcher/>
+              <RoomPaper/>
           </div>
       </div>
       );
