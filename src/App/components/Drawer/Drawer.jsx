@@ -18,11 +18,13 @@ import {
 } from 'react-router-dom';
 
 // our own components/data
-import Hello from '../../pages/Hello';
-import myList from '../../pages/List';
-import RoomList from '../../pages/RoomList';
-import WelcomePage from '../../pages/WelcomeTest';
+import Hello from '../../pages/Examples/HelloWorld';
+import myList from '../../pages/Examples/List';
+import RoomList from '../../pages/Examples/RoomList';
+import WelcomePage from '../../pages/Examples/WelcomeTest';
 import AdminPage from '../../pages/AdminPage';
+import Dashboard from '../../pages/Dashboard';
+import FinancialPage from '../../pages/Financial';
 
 const drawerWidth = 240;
 
@@ -30,36 +32,33 @@ window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
 
 const styles = theme => ({
   root: {
-    flexGrow: 1,
-    height: 440,
-    zIndex: 1,
-    overflow: 'hidden',
-    position: 'relative',
     display: 'flex',
-    width: '100%',
+  },
+  drawer: {
+    [theme.breakpoints.up('sm')]: {
+      width: drawerWidth,
+      flexShrink: 0,
+    },
   },
   appBar: {
-    position: 'absolute',
     marginLeft: drawerWidth,
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('sm')]: {
       width: `calc(100% - ${drawerWidth}px)`,
     },
   },
-  navIconHide: {
-    [theme.breakpoints.up('md')]: {
+  menuButton: {
+    marginRight: 20,
+    [theme.breakpoints.up('sm')]: {
       display: 'none',
     },
   },
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
     width: drawerWidth,
-    [theme.breakpoints.up('md')]: {
-      position: 'relative',
-    },
   },
   content: {
+    width: 75,
     flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3,
   },
 });
@@ -136,11 +135,13 @@ class ResponsiveDrawer extends React.Component {
             <div>
               <HashRouter>
                     <Switch>
-                        <Route exact path="/" component={Hello} />
+                        <Route exact path="/" component={Dashboard} />
+                        <Route path='/financial' component={FinancialPage} />
                         <Route path='/list' component={myList} />
                         <Route path='/roomList' component={RoomList} />
                         <Route path='/adminPage' component={AdminPage} />
                         <Route path='/test' component={WelcomePage} />
+                        <Route path='/hello' component={Hello} />
                     </Switch>
                     </HashRouter>
                 </div>
