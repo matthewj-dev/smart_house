@@ -1,18 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
+import React from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import MenuItem from "@material-ui/core/MenuItem";
+import Menu from "@material-ui/core/Menu";
 
 const styles = theme => ({
   root: {
-    width: '100%',
+    width: "100%",
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
+    backgroundColor: theme.palette.background.paper
+  }
 });
 
 class RoomSwitcher extends React.Component {
@@ -20,7 +20,7 @@ class RoomSwitcher extends React.Component {
   state = {
     anchorEl: null,
     selectedIndex: 1,
-    rooms: [],
+    rooms: []
   };
 
   // on mount get room list
@@ -30,16 +30,17 @@ class RoomSwitcher extends React.Component {
 
   // get room list and extract the name strings
   getRooms = () => {
-    fetch('/getRoomList')
-    .then(res => res.json())
-    .then(rooms => {
-      var myRooms = [];
-      rooms.forEach((element) => {
-        myRooms.push(element.room_name);
-      });
-      this.setState({ rooms: myRooms })
-    });
-  }
+    fetch("/getRoomList")
+      .then(res => res.json())
+      .then(rooms => {
+        var myRooms = [];
+        rooms.forEach(element => {
+          myRooms.push(element.room_name);
+        });
+        this.setState({ rooms: myRooms });
+      })
+      .catch(() => console.log("Whoops"));
+  };
 
   handleClickListItem = event => {
     this.setState({ anchorEl: event.currentTarget });
@@ -97,7 +98,7 @@ class RoomSwitcher extends React.Component {
 }
 
 RoomSwitcher.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(RoomSwitcher);
