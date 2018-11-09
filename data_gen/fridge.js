@@ -18,5 +18,5 @@ let run = () => {
         });
 };
 
-// any formula module *must* export some function so that it may be fun by the engine
-module.exports = run;
+// any formula module *must* export a run function so that it may be fun by the engine
+module.exports.run = run;

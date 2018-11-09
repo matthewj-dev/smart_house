@@ -11,7 +11,7 @@ setInterval(() => {
     console.log("Starting new iteration of formula engine...");
     // call each of our formulas
     formulas.forEach((formula) => {
-        formula();
+        formula.run();
     });
     console.log("Formula engine completed successfully!");
 }, 1000 * 15); 
