@@ -4,6 +4,11 @@ const path = require("path");
 const db = require("./db/db");
 const app = express();
 
+// by requiring the engine, we initialize and kick it off to
+// run
+const dataGenEngine = require('./data_gen/engine');
+
+
 app.use(express.static(path.join(__dirname, "/public")));
 
 app.get("/getList", (req, res) => {
