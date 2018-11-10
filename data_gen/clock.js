@@ -3,13 +3,15 @@
  *  Purpose: Provide a clock that runs faster than real time for simulation purposes.
  */
 let realTimeCache = new Date();
-let multiplier = 5.0;
+let multiplier = 60.0;
+
+let now = () => {
+    let now = new Date();
+    let diff = now - realTimeCache;
+    now.setTime(now.getTime() + (diff * multiplier));
+    return now;
+}
 
 module.exports = {
-    now: () => {
-        let now = new Date();
-        let diff = now - realTimeCache;
-        now.setTime(now.getTime() + (diff * multiplier));
-        return now;
-    }
+    now: now
 }

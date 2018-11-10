@@ -50,6 +50,36 @@ module.exports = {
     },
 
 
+    turnOn: async (objId) => {
+        let client;
+        try {
+            client = new Client(connParams);
+            client.connect();
+            console.log(`Turned on ${objId}`);
+            await client.query('update obj set is_on_open = true where obj_id = $1', [objId]);
+        } catch(err) {
+            console.error(`Error turning object on! ${err}`);
+            throw new Error(err);
+        } finally {
+            client.end();
+        }
+    },
+    turnOff: async (objId) => {
+        let client;
+        try {
+            client = new Client(connParams);
+            client.connect();
+            console.log(`Turned off obj: ${objId}`);
+            await client.query('update obj set is_on_open = false where obj_id = $1', [objId]);
+        } catch(err) {
+            console.error(`Error turning object on! ${err}`);
+            throw new Error(err);
+        } finally {
+            client.end();
+        }
+    },
+
+
     /*
         DATA GENERATION METHODS
     */
@@ -65,6 +95,6 @@ module.exports = {
         } finally {
             client.end();
         }
-    }
+    },
 }
 

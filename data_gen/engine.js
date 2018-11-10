@@ -6,7 +6,7 @@ let formulas = [
     require('./fridge')
 ];
 
-// run our data generation engine every 15 seconds
+// run our data generation engine every 3 seconds
 setInterval(() => {
     console.log("Starting new iteration of formula engine...");
     // call each of our formulas
@@ -14,4 +14,4 @@ setInterval(() => {
         formula.run();
     });
     console.log("Formula engine completed successfully!");
-}, 1000 * 15); 
+}, 1000 * 3); 
