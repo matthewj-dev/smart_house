@@ -8,3 +8,18 @@ select json_agg
   )
 ) as model
 from generate_series('2018-01-01', '2018-12-31', interval '1 month') m;
+
+create or replace view random_events_info
+as
+select
+  obj_id
+, extract(epoch from duration) as duration
+, extract(epoch from duration_deviation) as duration_deviation
+, weekday_frequency
+, weekend_frequency
+from obj
+where duration is not null
+and duration_deviation is not null
+and weekday_frequency is not null
+and weekend_frequency is not null
+;

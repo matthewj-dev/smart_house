@@ -8,12 +8,16 @@ create table if not exists room
 
 drop table if exists obj cascade;
 create table if not exists obj
-( obj_id     serial not null
-, room_id    int    not null
-, obj_name   text   not null
-, watts      int    null -- can be null for things like doors
-, gallons    int    null -- can be null for things that don't need water
-, is_on_open boolean default false -- is this thing on/off, open/closed? guess I'll leave this nullable for now
+( obj_id              serial   not null
+, room_id             int      not null
+, obj_name            text     not null
+, watts               int      null -- can be null for things like doors
+, gallons             int      null -- can be null for things that don't need water
+, is_on_open          boolean  default false -- is this thing on/off, open/closed? guess I'll leave this nullable for now
+, duration            interval null
+, duration_deviation  interval null
+, weekday_frequency   int      null
+, weekend_frequency   int      null 
 , constraint pk_obj primary key (obj_id) using index tablespace pg_default
 , constraint fk_obj_1 foreign key (room_id) references room(room_id) on delete cascade   
 );

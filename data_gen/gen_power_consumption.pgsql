@@ -17,5 +17,6 @@ as $$
     , watts
     from obj
     where is_on_open
+    and watts is not null
     ;
 $$ language sql volatile;
