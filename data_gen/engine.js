@@ -3,7 +3,7 @@ const clock = require('./clock');
 
 // pull in the formulas:
 let formulas = [
-    require('./fridge')
+    require('./gen_power_consumption')
 ];
 
 // run our data generation engine every 3 seconds

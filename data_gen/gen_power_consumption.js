@@ -7,14 +7,14 @@ let run = () => {
     let now = clock.now();
     // I preferred to write this data generation in SQL, so go ahead and
     // call out to the gen_fridge database function
-    db.genFridge(lastRunTime, clock.now())
+    db.genPowerConsumption(lastRunTime, clock.now())
         .then(() => {
             // write now as our last run time so we can grab a duration
             // next time we are called by the engine
             lastRunTime = now;
         })
         .catch((err) => {
-            console.error(`Failed to generate data for refrigerator! Error: ${err}`);
+            console.error(`Failed to generate data for general electric objs! Error: ${err}`);
         });
 };
 

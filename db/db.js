@@ -83,14 +83,14 @@ module.exports = {
     /*
         DATA GENERATION METHODS
     */
-    genFridge: async (lastRun, now) => {
+    genPowerConsumption: async (lastRun, now) => {
         let client;
         try {
             client = new Client(connParams);
             client.connect();
-            await client.query('select gen_fridge($1::timestamptz, $2::timestamptz)', [lastRun, now]);
+            await client.query('select gen_power_consumption($1::timestamptz, $2::timestamptz)', [lastRun, now]);
         } catch(err) {
-            console.error(`Error generating refrigerator data! ${err}`);
+            console.error(`Error generating general power consumption data! ${err}`);
             throw new Error(err);
         } finally {
             client.end();

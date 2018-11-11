@@ -1,7 +1,7 @@
 /*
-    GEN FRIDGE
+    GEN POWER CONSUMPTION
 */
-create or replace function gen_fridge(_last_run timestamptz, _now timestamptz)
+create or replace function gen_power_consumption(_last_run timestamptz, _now timestamptz)
 returns void 
 as $$
     insert into power_consumption
@@ -16,7 +16,6 @@ as $$
     , _now - _last_run
     , watts
     from obj
-    where obj_name = 'refrigerator'
-    and is_on_open
+    where is_on_open
     ;
 $$ language sql volatile;
