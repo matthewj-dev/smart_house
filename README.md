@@ -17,3 +17,9 @@ This only needs to be run once to set up your environment.
 ```
 ssh -L 5433:cisdb:5432 blazerid@moat.cis.uab.edu
 ```
+
+# Generate Events
+```
+cd data_gen
+node event_gen.js
+```

@@ -3,7 +3,7 @@
  *  Purpose: Provide a clock that runs faster than real time for simulation purposes.
  */
 let realTimeCache = new Date();
-let multiplier = 60.0;
+let multiplier = 600.0;
 
 let now = () => {
     let now = new Date();

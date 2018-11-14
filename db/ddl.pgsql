@@ -11,6 +11,7 @@ create table if not exists obj
 ( obj_id              serial   not null
 , room_id             int      not null
 , obj_name            text     not null
+, category            text     null
 , watts               int      null -- can be null for things like doors
 , gallons             int      null -- can be null for things that don't need water
 , is_on_open          boolean  default false -- is this thing on/off, open/closed? guess I'll leave this nullable for now
