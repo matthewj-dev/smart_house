@@ -49,6 +49,19 @@ module.exports = {
         }
     },
 
+    adminPageModel: async () => {
+        let client;
+        try {
+            client = new Client(connParams);
+            client.connect();
+            return (await client.query('select * from admin_page_model')).rows[0].model;
+        } catch(err) {
+            console.error(`Error retriving admin page data! ${err}`);
+            throw new Error(err);
+        } finally {
+            client.end();
+        }
+    },
     
     randomEventsInfo: async () => {
         let client;

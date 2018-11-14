@@ -23,3 +23,17 @@ and duration_deviation is not null
 and weekday_frequency is not null
 and weekend_frequency is not null
 ;
+
+create or replace view admin_page_model
+as
+select json_agg
+( jsonb_build_object
+  ( 'obj_id', o.obj_id
+  , 'room_id', r.room_id
+  , 'current_state', o.is_on_open
+  )
+) as model
+from obj o
+inner join room r
+on o.room_id = r.room_id
+;
