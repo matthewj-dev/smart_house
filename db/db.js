@@ -47,6 +47,95 @@ module.exports = {
         } finally {
             client.end();
         }
-    }
+    },
+
+    adminPageModel: async () => {
+        let client;
+        try {
+            client = new Client(connParams);
+            client.connect();
+            return (await client.query('select * from admin_page_model')).rows[0].model;
+        } catch(err) {
+            console.error(`Error retriving admin page data! ${err}`);
+            throw new Error(err);
+        } finally {
+            client.end();
+        }
+    },
+
+    powerConsumptionByCategory: async () => {
+        let client;
+        try {
+            client = new Client(connParams);
+            client.connect();
+            return (await client.query('select * from power_consumption_by_category($1::timestamptz', clock.now())).rows[0].model;
+        } catch(err) {
+            console.error(`Error retriving admin page data! ${err}`);
+            throw new Error(err);
+        } finally {
+            client.end();
+        }
+    },
+    
+    randomEventsInfo: async () => {
+        let client;
+        try {
+            client = new Client(connParams);
+            client.connect();
+            return (await client.query('select * from random_events_info')).rows;
+        } catch(err) {
+            console.error(`Error retriving random event data! ${err}`);
+            throw new Error(err);
+        } finally {
+            client.end();
+        }
+    },
+
+    turnOn: async (objId) => {
+        let client;
+        try {
+            client = new Client(connParams);
+            client.connect();
+            console.log(`Turned on ${objId}`);
+            await client.query('update obj set is_on_open = true where obj_id = $1', [objId]);
+        } catch(err) {
+            console.error(`Error turning object on! ${err}`);
+            throw new Error(err);
+        } finally {
+            client.end();
+        }
+    },
+    turnOff: async (objId) => {
+        let client;
+        try {
+            client = new Client(connParams);
+            client.connect();
+            console.log(`Turned off obj: ${objId}`);
+            await client.query('update obj set is_on_open = false where obj_id = $1', [objId]);
+        } catch(err) {
+            console.error(`Error turning object on! ${err}`);
+            throw new Error(err);
+        } finally {
+            client.end();
+        }
+    },
+
+
+    /*
+        DATA GENERATION METHODS
+    */
+    genPowerConsumption: async (lastRun, now) => {
+        let client;
+        try {
+            client = new Client(connParams);
+            client.connect();
+            await client.query('select gen_power_consumption($1::timestamptz, $2::timestamptz)', [lastRun, now]);
+        } catch(err) {
+            console.error(`Error generating general power consumption data! ${err}`);
+            throw new Error(err);
+        } finally {
+            client.end();
+        }
+    },
 }
 
