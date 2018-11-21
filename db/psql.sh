@@ -1,0 +1,1 @@
+PGPASSWORD=jbarbazeweb psql -h localhost -p 5433 -U jbarbazeweb -d jbarbaze

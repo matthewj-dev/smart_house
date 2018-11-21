@@ -18,10 +18,21 @@ select
 , weekday_frequency
 , weekend_frequency
 from obj
-where duration is not null
-and duration_deviation is not null
+where duration_deviation is not null  -- daily events have these
+and weekend_frequency is not null     -- daily events have these
+;
+
+create or replace view weekly_random_events_info
+as
+select
+  obj_id
+, extract(epoch from duration) as duration
+, weekday_frequency as frequency
+from obj
+where duration_deviation is null  -- weekly events don't have these
+and weekend_frequency is null     -- weekly events don't have these
+and duration is not null
 and weekday_frequency is not null
-and weekend_frequency is not null
 ;
 
 create or replace view admin_page_model

@@ -41,6 +41,20 @@ app.get("/getMonthlyBilling", (req, res) => {
   });
 });
 
+app.get("/adminPageModel", (req, res) => {
+  db.adminPageModel()
+  .then(model => {
+    res.json(model);
+  });
+});
+
+app.get("/powerConsumptionByCategory", (req, res) => {
+  db.monthlyBilling()
+  .then(model => {
+    res.json(model);
+  });
+});
+
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/public/index.html"));
 });
