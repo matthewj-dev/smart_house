@@ -48,24 +48,17 @@ create table if not exists water_consumption
 );
 create index if not exists ix_water_consumption_1 on water_consumption(time_used);
 
-/*
-No use in trying to cache this. Due to changes,
-we'll probably have to calc every time.
-Except maybe for ranges completely in the past.
-drop table if exists power_bill cascade;
-create table if not exists power_bill
-( power_bill_id serial
-, period        tstzrange
-, amount        numeric
-, kwh           numeric
-, constraint pk_power_bill primary key (power_bill_id) using index tablespace pg_default
-);
-*/
 
 drop table if exists temperature cascade;
 create table if not exists temperature
 ( temp_time       timestamptz
 , is_outside_temp boolean
-, val             int -- might need to be a double?
+, val             numeric
 , constraint pk_temperature primary key (temp_time, is_outside_temp) using index tablespace pg_default
+);
+
+drop table if exists thermostat cascade;
+create table if not exists thermostat
+( current_setting int
+, heat            boolean -- true if set for heating, false if set for air conditioner
 );
