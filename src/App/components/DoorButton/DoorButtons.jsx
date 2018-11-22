@@ -18,7 +18,7 @@ const styles = theme => ({
   },
 });
 
-class TVButton extends React.Component {
+class ToggleButtons extends React.Component {
   state = {
     alignment: 'left',
     formats: ['bold'],
@@ -39,7 +39,17 @@ class TVButton extends React.Component {
             <ToggleButtonGroup value={formats} onChange={this.handleFormat}>
               <ToggleButton value="doorOne">
                 <Typography variant="caption">
-                    TV
+                    Door 1
+                </Typography>
+              </ToggleButton>
+              <ToggleButton value="doorTwo">
+                <Typography variant="caption">
+                    Door 2
+                </Typography>
+              </ToggleButton>
+              <ToggleButton value="doorThree">
+                <Typography variant="caption">
+                    Door 3
                 </Typography>
               </ToggleButton>
             </ToggleButtonGroup>
@@ -50,8 +60,8 @@ class TVButton extends React.Component {
   }
 }
 
-TVButton.propTypes = {
+ToggleButtons.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(TVButton);
+export default withStyles(styles)(ToggleButtons);

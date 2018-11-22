@@ -38,20 +38,6 @@ class RoomSwitcher extends React.Component {
     
   }
 
-  // get room list and extract the name strings
-  getRooms = () => {
-    fetch("/getRoomList")
-      .then(res => res.json())
-      .then(rooms => {
-        var myRooms = [];
-        rooms.forEach(element => {
-          myRooms.push(element.room_name);
-        });
-        this.setState({ rooms: myRooms });
-      })
-      .catch(() => console.log("Whoops"));
-  };
-
   handleClickListItem = event => {
     this.setState({ anchorEl: event.currentTarget });
   };
