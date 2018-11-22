@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Accordion from "../components/Accordion/Accordion";
-import AdminDialog from "../components/AdminDialog/AdminDialog";
+import AdminDialog from "../components/Dialogs/AdminDialog";
 
 class AdminPage extends Component {
   render() {
