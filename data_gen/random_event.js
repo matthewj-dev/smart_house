@@ -33,8 +33,8 @@ module.exports = class RandomEvent {
 
     /**
      * private method
-     * plans out events for the new 24 hours
-     * `constructor` and `genEvent()` calls this when the `events` queue is empty
+     * plans out events for the next 24 hours
+     * `constructor` and `fireEvent()` calls this when the `events` queue is empty
      */
     _scheduleEvents() {
         let now = clock.now();

@@ -91,6 +91,20 @@ module.exports = {
         }
     },
 
+    weeklyRandomEventsInfo: async () => {
+        let client;
+        try {
+            client = new Client(connParams);
+            client.connect();
+            return (await client.query('select * from weekly_random_events_info')).rows;
+        } catch(err) {
+            console.error(`Error retriving random event data! ${err}`);
+            throw new Error(err);
+        } finally {
+            client.end();
+        }
+    },
+
     turnOn: async (objId) => {
         let client;
         try {
