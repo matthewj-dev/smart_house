@@ -20,12 +20,22 @@ class RoomSwitcher extends React.Component {
   state = {
     anchorEl: null,
     selectedIndex: 1,
-    rooms: []
+    rooms: ["master bedroom",
+    "bedroom 2",
+    "bedroom 3",
+    "master bathroom",
+    "bathroom 2",
+    "garage",
+    "laundry room",
+    "living room",
+    "kitchen",
+    "outside"]
+  
   };
 
   // on mount get room list
   componentDidMount() {
-    this.getRooms();
+    
   }
 
   // get room list and extract the name strings

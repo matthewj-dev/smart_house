@@ -20,6 +20,7 @@ class RoomList extends Component {
     fetch('/getRoomList')
     .then(res => res.json())
     .then(list => this.setState({ list }))
+    .catch(() => console.log("Whoops"));
   }
 
   render() {
