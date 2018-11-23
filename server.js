@@ -10,6 +10,8 @@ const dataGenEngine = require('./data_gen/engine');
 
 
 app.use(express.static(path.join(__dirname, "/public")));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.get("/getList", (req, res) => {
   var list = ["item1", "item2", "item3"];
@@ -61,6 +63,21 @@ app.get("/powerConsumptionByCategory", (req, res) => {
   .then(model => {
     res.json(model);
   });
+});
+
+app.post("/turnOn", (req, res) => {
+  db.turnOn(req.body.objId);
+  res.end('OK');
+});
+
+app.post("/turnOff", (req, res) => {
+  db.turnOff(req.body.objId);
+  res.end('OK');
+});
+
+app.post("/setThermostat", (req, res) => {
+  db.setThermostat(req.body.setting, req.body.heat);
+  res.end('OK');
 });
 
 app.get("*", (req, res) => {

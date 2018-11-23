@@ -149,6 +149,20 @@ module.exports = {
         }
     },
 
+    setThermostat: async (setting, heat) => {
+        let client;
+        try {
+            client = new Client(connParams);
+            client.connect();
+            await client.query('update thermostat set current_setting = $1, heat = $2', [setting, heat]);
+        } catch(err) {
+            console.error(`Error turning object on! ${err}`);
+            throw new Error(err);
+        } finally {
+            client.end();
+        }
+    },
+
 
     /*
         DATA GENERATION METHODS
