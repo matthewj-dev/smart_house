@@ -49,6 +49,58 @@ inner join room r
 on o.room_id = r.room_id
 ;
 
+create or replace function dashboard_model(_now timestamptz)
+returns json
+as $$
+declare
+    _temp json;
+    _obj json;
+    _temp_graph json;
+begin
+
+    select json_agg
+    ( json_build_object
+      ( 'time', d
+      , 'inside', coalesce(i.val, 0)
+      , 'outside', coalesce(o.val, 0)
+      )
+    )
+    into strict _temp_graph
+    from generate_series(date_trunc('hour', _now) - interval '30 days', date_trunc('hour', _now), interval '1 hour') d
+    left outer join temperature i
+    on not i.is_outside_temp
+    and i.temp_time = d
+    left outer join temperature o
+    on i.is_outside_temp
+    and o.temp_time = i.temp_time
+    ;
+
+    with rooms as
+    (
+        select
+        r.room_id
+        , r.room_name
+        , json_object_agg
+          ( o.obj_name
+          , json_build_object
+            ( 'status', o.is_on_open
+            , 'obj_id', o.obj_id
+            )
+          ) as objs
+        from room r
+        inner join obj o
+        on o.room_id = r.room_id
+        group by r.room_id, r.room_name
+    )
+    select json_object_agg(r.room_name, r.objs)
+    into strict _obj
+    from rooms r
+    ;
+
+    return json_build_object('temperature', _temp, 'objects', _obj);
+end;
+$$ language plpgsql stable;
+
 create or replace function power_consumption_by_category(_now timestamptz)
 returns json as
 $$

@@ -48,8 +48,16 @@ app.get("/adminPageModel", (req, res) => {
   });
 });
 
+
+app.get("/dashboardModel", (req, res) => {
+  db.dashboardModel()
+  .then(model => {
+    res.json(model);
+  });
+});
+
 app.get("/powerConsumptionByCategory", (req, res) => {
-  db.monthlyBilling()
+  db.powerConsumptionByCategory()
   .then(model => {
     res.json(model);
   });

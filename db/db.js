@@ -1,4 +1,5 @@
 const { Client } = require('pg')
+const clock = require('../data_gen/clock');
 
 const connParams = {
     host: "localhost",
@@ -63,12 +64,26 @@ module.exports = {
         }
     },
 
+    dashboardModel: async () => {
+        let client;
+        try {
+            client = new Client(connParams);
+            client.connect();
+            return (await client.query('select * from dashboard_model($1::timestamptz) as model', [clock.now()])).rows[0].model;
+        } catch(err) {
+            console.error(`Error retriving dashboard model data! ${err}`);
+            throw new Error(err);
+        } finally {
+            client.end();
+        }
+    },
+
     powerConsumptionByCategory: async () => {
         let client;
         try {
             client = new Client(connParams);
             client.connect();
-            return (await client.query('select * from power_consumption_by_category($1::timestamptz', clock.now())).rows[0].model;
+            return (await client.query('select * from power_consumption_by_category($1::timestamptz) as model', [clock.now()])).rows[0].model;
         } catch(err) {
             console.error(`Error retriving admin page data! ${err}`);
             throw new Error(err);
