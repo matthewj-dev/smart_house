@@ -22,13 +22,13 @@ class Dashboard extends Component {
   getData = () => {
     fetch('/getMonthlyBilling')
     .then(res => res.json())
-    .then(data => {this.setState({ data })})
+    .then(tempData => {this.setState({ tempData })})
     .catch(() => console.log('Dashboard Broke'));
   }
 
   render() {
     var { tempData } = this.state;
-    // console.log(data);
+    // console.log(tempData);
     return (
     <div id='container'>
         <div>

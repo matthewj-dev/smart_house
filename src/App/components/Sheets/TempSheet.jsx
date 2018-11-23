@@ -20,8 +20,8 @@ const styles = theme => ({
 
 function InsetDividers(props) {
     const { classes } = props;
-    const insideTemp = null;
-    const outsideTemp = null;
+    const insideTemp = 20;
+    const outsideTemp = 30;
 
     return (
         <div className={classes.root}>

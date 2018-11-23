@@ -8,18 +8,18 @@ import CartesianGrid from 'recharts/lib/cartesian/CartesianGrid';
 import Tooltip from 'recharts/lib/component/Tooltip';
 
 const testData = [
-//   { name: 'Jan', bill: 13.3920000000002 },
-//   { name: 'Feb', bill: 72.3920000000002 },
-//   { name: 'Mar', bill: 25.3920000000002 },
-//   { name: 'Apr', bill: 13.3920000000002 },
-//   { name: 'May', bill: 28.3920000000002 },
-//   { name: 'Jun', bill: 10.3920000000002 },
-//   { name: 'Jul', bill: 13.3920000000002 },
-//   { name: 'Aug', bill: 45.3920000000002 },
-//   { name: 'Sept', bill: 18.3920000000002 },
-//   { name: 'Oct', bill: 19.3920000000002 },
-//   { name: 'Nov', bill: 0 },
-//   { name: 'Dec', bill: 40.3920000000002 },
+  // { name: 'Jan', bill: 13.3920000000002 },
+  // { name: 'Feb', bill: 72.3920000000002 },
+  // { name: 'Mar', bill: 25.3920000000002 },
+  // { name: 'Apr', bill: 13.3920000000002 },
+  // { name: 'May', bill: 28.3920000000002 },
+  // { name: 'Jun', bill: 10.3920000000002 },
+  // { name: 'Jul', bill: 13.3920000000002 },
+  // { name: 'Aug', bill: 45.3920000000002 },
+  // { name: 'Sept', bill: 18.3920000000002 },
+  // { name: 'Oct', bill: 19.3920000000002 },
+  // { name: 'Nov', bill: 0 },
+  // { name: 'Dec', bill: 40.3920000000002 },
 ];
 
 class SimpleLineChart extends React.Component {
