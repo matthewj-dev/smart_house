@@ -75,6 +75,11 @@ app.post("/turnOff", (req, res) => {
   res.end('OK');
 });
 
+/**
+ * This endpoint expects 2 parameters:
+ * setting:numeric (degrees Farenheit to set thermostat for)
+ * head:boolean (true for heat, false for AC)
+ */
 app.post("/setThermostat", (req, res) => {
   db.setThermostat(req.body.setting, req.body.heat);
   res.end('OK');
