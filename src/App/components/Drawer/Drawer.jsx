@@ -30,6 +30,14 @@ const drawerWidth = 240;
 
 window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
 
+// Option 1)
+// #ccccff for menu bar
+// #dddddd for background
+
+// Option 2(possible Night Mode)
+// #66ccff for menu bar
+// #444444 for background
+
 const styles = theme => ({
   root: {
     display: 'flex',

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import CurrentTemps from '../components/Sheets/TempSheet';
 import TVButton from '../components/TVButton/TVButton';
 import LineChart from '../components/Chart/LineChart';
+import Slider from '../components/TempSlider/TempSlider';
 import FloorPlan from '../components/Dialogs/FloorPlan';
 import RoomPaper from '../components/Sheets/BasicSheet';
 import DoorButtons from '../components/DoorButton/DoorButtons';
@@ -10,7 +11,7 @@ import './Style/Dashboard.css'
 class Dashboard extends Component {
 
   state = {
-    data: [],
+    tempData: [],
   };
 
   componentDidMount() {
@@ -26,19 +27,24 @@ class Dashboard extends Component {
   }
 
   render() {
-    var { data } = this.state;
+    var { tempData } = this.state;
     // console.log(data);
     return (
-    <div>
+    <div id='container'>
         <div>
             <CurrentTemps/>
-            <LineChart data={ data } />
+            <LineChart data={ tempData } />
             <TVButton/>
         </div>
+        
         <div className='bottom'>
           <FloorPlan/>
           <DoorButtons/>
           <RoomPaper/>
+        </div>
+        {/* try to use a table for this */}
+        <div id='side'>
+          <Slider/>
         </div>
     </div>
     );
