@@ -53,10 +53,44 @@ create or replace function dashboard_model(_now timestamptz)
 returns json
 as $$
 declare
+    _cur_inside numeric;
+    _cur_outside numeric;
     _temp json;
     _obj json;
     _temp_graph json;
 begin
+
+    with t as
+    (
+      select max(temp_time) latest
+      from temperature t
+      where not t.is_outside_temp
+      and temp_time < _now
+    )
+    select val
+    into strict _cur_inside
+    from temperature tmp
+    inner join t
+    on tmp.temp_time = t.latest
+    and not tmp.is_outside_temp
+    limit 1
+    ;
+
+    with t as
+    (
+      select max(temp_time) latest
+      from temperature t
+      where t.is_outside_temp
+      and temp_time < _now
+    )
+    select val
+    into strict _cur_outside
+    from temperature tmp
+    inner join t
+    on tmp.temp_time = t.latest
+    and tmp.is_outside_temp
+    limit 1
+    ;
 
     select json_agg
     ( json_build_object
@@ -73,6 +107,14 @@ begin
     left outer join temperature o
     on i.is_outside_temp
     and o.temp_time = i.temp_time
+    ;
+
+    select json_build_object
+    ( 'thermostat', json_build_object('setting', t.current_setting, 'heatOrCool', case t.heat when true then 'heat' else 'cool' end)
+    , 'inside', _cur_inside
+    , 'outside', _cur_outside
+    ) into strict _temp
+    from thermostat t
     ;
 
     with rooms as

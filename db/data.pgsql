@@ -91,4 +91,4 @@ inner join room r
 on r.room_name = o.room_name
 ;
 
-insert into thermostat(current_setting, heat) values (60, true);
+insert into thermostat(current_setting, heat) values (70, true);
