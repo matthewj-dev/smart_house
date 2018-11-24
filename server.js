@@ -81,6 +81,10 @@ app.post("/turnOff", (req, res) => {
  * head:boolean (true for heat, false for AC)
  */
 app.post("/setThermostat", (req, res) => {
+  if (req.body.setting === undefined || (req.body.heat === undefined)) {
+    res.end('BAD REQUEST');
+    return;
+  }
   db.setThermostat(req.body.setting, req.body.heat);
   res.end('OK');
 });
