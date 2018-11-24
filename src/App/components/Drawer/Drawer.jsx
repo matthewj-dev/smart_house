@@ -84,7 +84,7 @@ class ResponsiveDrawer extends React.Component {
     const { classes, theme } = this.props;
 
     const drawer = (
-      <div>
+      <div onClick={this.handleDrawerToggle}>
         <div className={classes.toolbar} />
         <Divider />
         <List>{mailFolderListItems}</List>
