@@ -36,41 +36,6 @@ export const mailFolderListItems = (
                 <ListItemText primary='Financial'/>
             </ListItem>
         </NavLink>
-
-        <NavLink to="/List" style={{ textDecoration: 'none' }}>
-            <ListItem button>
-                <ListItemIcon>
-                    <StarIcon />
-                </ListItemIcon>
-                <ListItemText primary="List" />
-            </ListItem>
-        </NavLink>
-
-        <NavLink exact to="/hello" style={{ textDecoration: 'none' }}>
-            <ListItem button>
-                <ListItemIcon>
-                    <InboxIcon />
-                </ListItemIcon>
-                <ListItemText primary="HelloWorld" />
-            </ListItem>
-        </NavLink>
-
-        <NavLink to='/roomList' style={{ textDecoration: 'none' }}>
-        <ListItem button>
-        <ListItemIcon>
-            <SendIcon />
-        </ListItemIcon>
-        <ListItemText primary="Room List" />
-        </ListItem>
-        </NavLink>
-        <NavLink to='/test' style={{ textDecoration: 'none' }}>
-        <ListItem button>
-        <ListItemIcon>
-            <DraftsIcon />
-        </ListItemIcon>
-        <ListItemText primary="Welcome Test" />
-        </ListItem>
-        </NavLink>
         
           </div>
           
