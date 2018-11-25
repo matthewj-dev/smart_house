@@ -18,16 +18,16 @@ const styles = theme => ({
   },
 });
 
-class TVButton extends React.Component {
+class DoorButtons extends React.Component {
   state = {
     alignment: 'left',
     formats: ['bold'],
   };
 
-  // use to handle the toggling between bold and not bold
+  // handle toggling bold 
   handleFormat = (formats) => this.setState({ formats });
 
-  // use to change alignment
+  // handle where the buttons align to
   handleAlignment = (alignment) => this.setState({ alignment });
 
   render() {
@@ -39,9 +39,19 @@ class TVButton extends React.Component {
         <Grid item xs={12} sm={6}>
           <div className={classes.toggleContainer}>
             <ToggleButtonGroup value={formats} onChange={this.handleFormat}>
-              <ToggleButton value="TV">
+              <ToggleButton value="doorOne">
                 <Typography variant="caption">
-                    TV
+                    Door 1
+                </Typography>
+              </ToggleButton>
+              <ToggleButton value="doorTwo">
+                <Typography variant="caption">
+                    Door 2
+                </Typography>
+              </ToggleButton>
+              <ToggleButton value="doorThree">
+                <Typography variant="caption">
+                    Door 3
                 </Typography>
               </ToggleButton>
             </ToggleButtonGroup>
@@ -52,8 +62,8 @@ class TVButton extends React.Component {
   }
 }
 
-TVButton.propTypes = {
+DoorButtons.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(TVButton);
+export default withStyles(styles)(DoorButtons);

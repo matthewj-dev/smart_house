@@ -10,7 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Hidden from '@material-ui/core/Hidden';
 import Divider from '@material-ui/core/Divider';
 import MenuIcon from '@material-ui/icons/Menu';
-import { mailFolderListItems, otherMailFolderListItems } from './tiles';
+import { UserItems, TechnicalItems } from './tiles';
 import {
   Route,
   HashRouter,
@@ -26,9 +26,20 @@ import AdminPage from '../../pages/AdminPage';
 import Dashboard from '../../pages/Dashboard';
 import FinancialPage from '../../pages/Financial';
 
+// using ResponsiveDrawer example from material-ui
+
 const drawerWidth = 240;
 
 window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
+
+// try this
+// Option 1)
+// #ccccff for menu bar
+// #dddddd for background
+
+// Option 2(possible Night Mode)
+// #66ccff for menu bar
+// #444444 for background
 
 const styles = theme => ({
   root: {
@@ -76,12 +87,12 @@ class ResponsiveDrawer extends React.Component {
     const { classes, theme } = this.props;
 
     const drawer = (
-      <div>
+      <div onClick={this.handleDrawerToggle}>
         <div className={classes.toolbar} />
         <Divider />
-        <List>{mailFolderListItems}</List>
+        <List>{UserItems}</List>
         <Divider />
-        <List>{otherMailFolderListItems}</List>
+        <List>{TechnicalItems}</List>
       </div>
     );
 

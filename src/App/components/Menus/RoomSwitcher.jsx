@@ -20,36 +20,30 @@ class RoomSwitcher extends React.Component {
   state = {
     anchorEl: null,
     selectedIndex: 1,
-    rooms: []
+    rooms: ["master bedroom",
+    "bedroom 2",
+    "bedroom 3",
+    "master bathroom",
+    "bathroom 2",
+    "garage",
+    "laundry room",
+    "living room",
+    "kitchen",
+    "outside"]
+  
   };
 
-  // on mount get room list
-  componentDidMount() {
-    this.getRooms();
-  }
-
-  // get room list and extract the name strings
-  getRooms = () => {
-    fetch("/getRoomList")
-      .then(res => res.json())
-      .then(rooms => {
-        var myRooms = [];
-        rooms.forEach(element => {
-          myRooms.push(element.room_name);
-        });
-        this.setState({ rooms: myRooms });
-      })
-      .catch(() => console.log("Whoops"));
-  };
-
+  // change the anchor for the switcher
   handleClickListItem = event => {
     this.setState({ anchorEl: event.currentTarget });
   };
 
+  // handle the click for each menu item
   handleMenuItemClick = (event, index) => {
     this.setState({ selectedIndex: index, anchorEl: null });
   };
 
+  // close the menu
   handleClose = () => {
     this.setState({ anchorEl: null });
   };
@@ -81,6 +75,7 @@ class RoomSwitcher extends React.Component {
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
         >
+          {/* expand the menu to the rooms list */}
           {rooms.map((option, index) => (
             <MenuItem
               key={option}

@@ -1,9 +1,0 @@
-.bottom {
-    position:absolute;
-    left: 50%;
-    top: 86vh;
-    transform:translateY(-200%);
-    transform: translateX(-50%);
-    -webkit-transform: translateX(-50%);
-    width:50vh;
-}

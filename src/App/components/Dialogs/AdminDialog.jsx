@@ -43,7 +43,7 @@ export default class FormDialog extends React.Component {
             <Button onClick={this.handleClose} color="primary">
               Cancel
             </Button>
-            <Button color="primary">Submit</Button>
+            <Button color="primary" onClick={this.handleClose}>Submit</Button>
           </DialogActions>
         </Dialog>
       </div>

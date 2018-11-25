@@ -33,6 +33,7 @@ class SimpleCard extends React.Component {
   }
 
   // use fetch to get monthly bill
+  // don't use this
   getMonthBill = () => {
     fetch('/getMonthBill')
     .then(res => res.json())
