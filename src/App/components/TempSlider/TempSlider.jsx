@@ -13,11 +13,12 @@ const styles = {
   },
 };
 
-class VerticalSlider extends React.Component {
+class TempSlider extends React.Component {
   state = {
     value: 50,
   };
 
+  // change the value of the object
   handleChange = (event, value) => {
     this.setState({ value });
   };
@@ -31,6 +32,8 @@ class VerticalSlider extends React.Component {
         <Slider
           classes={{ container: classes.slider }}
           value={value}
+
+          // handle changing the value of the object
           onChange={this.handleChange}
           vertical
         />
@@ -39,8 +42,8 @@ class VerticalSlider extends React.Component {
   }
 }
 
-VerticalSlider.propTypes = {
+TempSlider.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(VerticalSlider);
+export default withStyles(styles)(TempSlider);

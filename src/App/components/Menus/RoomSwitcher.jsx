@@ -33,19 +33,17 @@ class RoomSwitcher extends React.Component {
   
   };
 
-  // on mount get room list
-  componentDidMount() {
-    
-  }
-
+  // change the anchor for the switcher
   handleClickListItem = event => {
     this.setState({ anchorEl: event.currentTarget });
   };
 
+  // handle the click for each menu item
   handleMenuItemClick = (event, index) => {
     this.setState({ selectedIndex: index, anchorEl: null });
   };
 
+  // close the menu
   handleClose = () => {
     this.setState({ anchorEl: null });
   };
@@ -77,6 +75,7 @@ class RoomSwitcher extends React.Component {
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
         >
+          {/* expand the menu to the rooms list */}
           {rooms.map((option, index) => (
             <MenuItem
               key={option}

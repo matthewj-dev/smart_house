@@ -24,20 +24,22 @@ class TVButton extends React.Component {
     formats: ['bold'],
   };
 
-  handleFormat = (event, formats) => this.setState({ formats });
+  // use to handle the toggling between bold and not bold
+  handleFormat = (formats) => this.setState({ formats });
 
-  handleAlignment = (event, alignment) => this.setState({ alignment });
+  // use to change alignment
+  handleAlignment = (alignment) => this.setState({ alignment });
 
   render() {
     const { classes } = this.props;
-    const { alignment, formats } = this.state;
+    const { formats } = this.state;
 
     return (
       <Grid container spacing={16}>
         <Grid item xs={12} sm={6}>
           <div className={classes.toggleContainer}>
             <ToggleButtonGroup value={formats} onChange={this.handleFormat}>
-              <ToggleButton value="doorOne">
+              <ToggleButton value="TV">
                 <Typography variant="caption">
                     TV
                 </Typography>

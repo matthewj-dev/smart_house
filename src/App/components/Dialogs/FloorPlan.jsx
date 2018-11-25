@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import FloorPlanImg from '../../../images/floorPlan.png';
@@ -13,10 +12,15 @@ function Transition(props) {
 }
 
 class FloorPlanPopup extends React.Component {
+
+  // closed by default
   state = {
     open: false,
   };
 
+  //
+  // Handle opening/closing
+  //
   handleClickOpen = () => {
     this.setState({ open: true });
   };
@@ -41,7 +45,7 @@ class FloorPlanPopup extends React.Component {
             {"Floor Plan"}
           </DialogTitle>
           <DialogContent>
-            <img src={FloorPlanImg}/>
+            <img src={FloorPlanImg} alt="FloorPlanHere"/>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">

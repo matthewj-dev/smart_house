@@ -18,19 +18,21 @@ const styles = theme => ({
   },
 });
 
-class ToggleButtons extends React.Component {
+class DoorButtons extends React.Component {
   state = {
     alignment: 'left',
     formats: ['bold'],
   };
 
-  handleFormat = (event, formats) => this.setState({ formats });
+  // handle toggling bold 
+  handleFormat = (formats) => this.setState({ formats });
 
-  handleAlignment = (event, alignment) => this.setState({ alignment });
+  // handle where the buttons align to
+  handleAlignment = (alignment) => this.setState({ alignment });
 
   render() {
     const { classes } = this.props;
-    const { alignment, formats } = this.state;
+    const { formats } = this.state;
 
     return (
       <Grid container spacing={16}>
@@ -60,8 +62,8 @@ class ToggleButtons extends React.Component {
   }
 }
 
-ToggleButtons.propTypes = {
+DoorButtons.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ToggleButtons);
+export default withStyles(styles)(DoorButtons);

@@ -12,16 +12,20 @@ const styles = theme => ({
   },
 });
 
-function PaperSheet(props) {
-  const { classes } = props;
+class PaperSheet extends React.Component {
 
-  return (
-    <div>
-      <Paper className={classes.root} elevation={1}>
-        <RoomSelector />
-      </Paper>
-    </div>
-  );
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <div>
+        <Paper className={classes.root} elevation={1}>
+          <RoomSelector />
+        </Paper>
+      </div>
+    );
+
+  }
 }
 
 PaperSheet.propTypes = {
