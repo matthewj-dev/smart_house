@@ -16,6 +16,16 @@ from stage
 on conflict do nothing
 ;
 
+-- use the AC or heat to maintain 70 degrees
+insert into temperature (temp_time, is_outside_temp, val)
+select
+  ('2018-' || "DATE")::timestamptz
+, false
+, ("HLY-TEMP-NORMAL" + (70 * 9)) / 10
+from stage
+on conflict do nothing
+;
+
 
 drop table stage;
 

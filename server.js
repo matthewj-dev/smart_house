@@ -10,6 +10,8 @@ const app = express();
 
 
 app.use(express.static(path.join(__dirname, "/public")));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.get("/getList", (req, res) => {
   var list = ["item1", "item2", "item3"];
@@ -48,11 +50,43 @@ app.get("/adminPageModel", (req, res) => {
   });
 });
 
-app.get("/powerConsumptionByCategory", (req, res) => {
-  db.monthlyBilling()
+
+app.get("/dashboardModel", (req, res) => {
+  db.dashboardModel()
   .then(model => {
     res.json(model);
   });
+});
+
+app.get("/powerConsumptionByCategory", (req, res) => {
+  db.powerConsumptionByCategory()
+  .then(model => {
+    res.json(model);
+  });
+});
+
+app.post("/turnOn", (req, res) => {
+  db.turnOn(req.body.objId);
+  res.end('OK');
+});
+
+app.post("/turnOff", (req, res) => {
+  db.turnOff(req.body.objId);
+  res.end('OK');
+});
+
+/**
+ * This endpoint expects 2 parameters:
+ * setting:numeric (degrees Farenheit to set thermostat for)
+ * head:boolean (true for heat, false for AC)
+ */
+app.post("/setThermostat", (req, res) => {
+  if (req.body.setting === undefined || (req.body.heat === undefined)) {
+    res.end('BAD REQUEST');
+    return;
+  }
+  db.setThermostat(req.body.setting, req.body.heat);
+  res.end('OK');
 });
 
 app.get("*", (req, res) => {
