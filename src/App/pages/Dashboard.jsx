@@ -15,7 +15,7 @@ class Dashboard extends Component {
     temperatures: [],
     objects: [],
     currentRoom: '',
-    thermo: '',
+    thermo: [],
   };
 
   // get the data on reload
@@ -63,28 +63,53 @@ class Dashboard extends Component {
 
   render() {
     var { temperatures, thermo } = this.state;
+    console.log(thermo);
 
+    if(thermo.length) {
+
+      return (
+        <div>
+            <div>
+                <CurrentTemps temps = { temperatures }/>
+                {/* <LineChart data={ dashData } /> */}
+                <TVButton/>
+            </div>
+    
+            {/* try to use a table for this */}
+            <div>
+              <TempSlider thermo={thermo[0]}/>
+            </div>
+            
+            <div>
+              <FloorPlan/>
+              <DoorButtons/>
+              <RoomPaper changeRoom = { this.changeRoom }/>
+            </div>
+          
+        </div>
+        );
+    } else {
     return (
-    <div>
-        <div>
-            <CurrentTemps temps = { temperatures }/>
-            {/* <LineChart data={ dashData } /> */}
-            <TVButton/>
-        </div>
-
-        {/* try to use a table for this */}
-        <div>
-          <TempSlider thermo={thermo}/>
-        </div>
+      <div>
+          <div>
+              <CurrentTemps temps = { temperatures }/>
+              {/* <LineChart data={ dashData } /> */}
+              <TVButton/>
+          </div>
+  
+          {/* try to use a table for this */}
+          
+          <div>
+            <FloorPlan/>
+            <DoorButtons/>
+            <RoomPaper changeRoom = { this.changeRoom }/>
+          </div>
         
-        <div>
-          <FloorPlan/>
-          <DoorButtons/>
-          <RoomPaper changeRoom = { this.changeRoom }/>
-        </div>
-      
-    </div>
-    );
+      </div>
+      );
+    }
+
+    
   }
 }
 

@@ -6,34 +6,22 @@ import Slider from '@material-ui/lab/Slider';
 const styles = {
   root: {
     display: 'flex',
-    height: 200,
+    height: 300,
   },
   slider: {
     padding: '0px 22px',
   },
 };
 
-class TempSlider extends React.Component {
+class VerticalSlider extends React.Component {
   state = {
-    value: 40,
-    heatOrCool: null,
+    value: 50,
   };
 
   componentDidMount() {
-    this.setState({value: 40})
+    this.setState({value: this.props.thermo});
   }
 
-  componentDidUpdate() {
-    var thermo = this.props.thermo;
-    console.log(thermo);
-    if(this.state.value == 40){
-      
-      this.setState({value: thermo[0] })
-
-    }
-  }
-
-  // change the value of the object
   handleChange = (event, value) => {
     this.setState({ value });
   };
@@ -46,11 +34,9 @@ class TempSlider extends React.Component {
       <div className={classes.root}>
         <Slider
           classes={{ container: classes.slider }}
+          value={value}
           max={120}
           min={40}
-          value={value}
-
-          // handle changing the value of the object
           onChange={this.handleChange}
           vertical
         />
@@ -59,8 +45,8 @@ class TempSlider extends React.Component {
   }
 }
 
-TempSlider.propTypes = {
+VerticalSlider.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(TempSlider);
+export default withStyles(styles)(VerticalSlider);

@@ -43,7 +43,7 @@ class RoomSwitcher extends React.Component {
     this.setState({ selectedIndex: index, anchorEl: null });
 
     // change state of dashboard room string to current room
-    var changeRoom = this.props.changeRoom;
+    changeRoom = this.props.changeRoom;
     changeRoom(this.state.rooms[index]);
   };
 
