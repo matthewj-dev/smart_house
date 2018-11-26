@@ -161,6 +161,16 @@ $$
   ;
 $$ language sql stable;
 
+
+create or replace function running_monthly_power_total(_now timestamptz)
+returns double precision
+as $$
+  select
+    0.12 * sum((watts/1000) * extract(epoch from duration)/60/60)
+  from power_consumption
+  where time_used between (_now - interval '30 days') and _now
+$$ language sql stable;
+
 create or replace function get_power_bill
 ( _rng tstzrange default tstzrange(current_date - interval '1 month', current_date)
 )
@@ -171,7 +181,7 @@ as $$
     from power_consumption pc
     where _rng @> pc.time_used
     ;
-$$ language sql volatile;
+$$ language sql stable;
 
 create or replace function gen_power_consumption(_last_run timestamptz, _now timestamptz)
 returns void 
