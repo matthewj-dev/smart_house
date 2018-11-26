@@ -29,15 +29,14 @@ class SimpleCard extends React.Component {
 
   // when component mounts get the month bill
   componentDidMount() {
-    // this.getMonthBill();
+    this.getMonthBill();
   }
 
   // use fetch to get monthly bill
-  // don't use this
   getMonthBill = () => {
-    fetch('/getMonthBill')
+    fetch('/runningMonthlyPowerTotal')
     .then(res => res.json())
-    .then(MonBill => {this.setState({ MonBill })});
+    .then(MonBill => {this.setState({ MonBill: MonBill.toFixed(2) })});
   }
 
   render() {
