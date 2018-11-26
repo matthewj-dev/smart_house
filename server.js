@@ -65,6 +65,13 @@ app.get("/powerConsumptionByCategory", (req, res) => {
   });
 });
 
+app.get("/runningMonthlyPowerTotal", (req, res) => {
+  db.runningMonthlyPowerTotal()
+  .then(total => {
+    res.json(total);
+  });
+});
+
 app.post("/turnOn", (req, res) => {
   db.turnOn(req.body.objId);
   res.end('OK');
