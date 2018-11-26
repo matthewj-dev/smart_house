@@ -15,8 +15,23 @@ const styles = {
 
 class TempSlider extends React.Component {
   state = {
-    value: 50,
+    value: 40,
+    heatOrCool: null,
   };
+
+  componentDidMount() {
+    this.setState({value: 40})
+  }
+
+  componentDidUpdate() {
+    var thermo = this.props.thermo;
+    console.log(thermo);
+    if(this.state.value == 40){
+      
+      this.setState({value: thermo[0] })
+
+    }
+  }
 
   // change the value of the object
   handleChange = (event, value) => {
@@ -31,6 +46,8 @@ class TempSlider extends React.Component {
       <div className={classes.root}>
         <Slider
           classes={{ container: classes.slider }}
+          max={120}
+          min={40}
           value={value}
 
           // handle changing the value of the object
