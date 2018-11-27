@@ -12,33 +12,30 @@ export default class FormDialog extends React.Component {
     this.state = {
       open: true,
       entered: "",
-      error: ""
+      error: "",
+      password: "Admin"
     };
     this.handleEnter = this.handleEnter.bind(this);
-    this.handleClose = this.handleClose.bind(this);
     this.validate = this.validate.bind(this);
   }
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
-
+  //validation of user's entered password
   validate(t) {
     t.preventDefault();
 
-    if (this.state.entered === "Admin") {
+    if (this.state.entered === this.state.password) {
       return this.setState({ open: false });
     } else {
       return this.setState({ error: "Password Required" });
     }
   }
-
+  //changes entered password state and saves
   handleEnter(t) {
     this.setState({
       entered: t.target.value
     });
   }
-
+  //Password = Admin
   render() {
     return (
       <div>
