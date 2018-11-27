@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { withStyles } from '@material-ui/core/styles';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 import CurrentTemps from '../components/Sheets/TempSheet';
 import TVButton from '../components/TVButton/TVButton';
 import LineChart from '../components/Chart/LineChart';
@@ -9,13 +11,7 @@ import RoomPaper from '../components/Sheets/BasicSheet';
 import DoorButtons from '../components/DoorButton/DoorButtons';
 import './Style/Dashboard.css';
 
-const styles = theme => ({
-  root: {
-    ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
-  },
-});
+
 
 class Dashboard extends Component {
 
@@ -123,4 +119,4 @@ class Dashboard extends Component {
   }
 }
 
-export default withStyles(styles)(Dashboard);
+export default (Dashboard);
