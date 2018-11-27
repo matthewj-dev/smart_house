@@ -9,6 +9,7 @@ body {
 /* Style the header */
 .top {
     /* padding: 30px; */
+    align-content: center;
     text-align: center;
     font-size: 35px;
 }
@@ -17,6 +18,7 @@ body {
 .middle {
     display: -webkit-flex;
     display: flex;
+    margin-bottom: 80px;
 }
 
 /* Style the navigation menu */
@@ -24,7 +26,7 @@ body {
     -webkit-flex: 1;
     -ms-flex: 1;
     flex: 1;
-    /* padding: 20px; */
+    padding: 20px;
 }
 
 /* Style the content */
@@ -32,12 +34,12 @@ body {
     -webkit-flex: 3;
     -ms-flex: 3;
     flex: 3;
-    /* padding: 10px; */
+    padding: 10px;
 }
 
 /* Style the footer */
 .bottom {
-    /* padding: 10px; */
+    padding: 10px;
     text-align: center;
 }
 

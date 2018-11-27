@@ -14,20 +14,19 @@ const styles = theme => ({
     alignItems: 'center',
     justifyContent: 'flex-start',
     margin: `${theme.spacing.unit}px 0`,
+    background: theme.palette.background.default,
   },
 });
 
-class TVButton extends React.Component {
+class ToggleButtons extends React.Component {
   state = {
     alignment: 'left',
-    formats: ['bold'],
+    formats: [''],
   };
 
-  // use to handle the toggling between bold and not bold
-  handleFormat = (formats) => this.setState({ formats });
+  handleFormat = (event, formats) => this.setState({ formats });
 
-  // use to change alignment
-  handleAlignment = (alignment) => this.setState({ alignment });
+  handleAlignment = (event, alignment) => this.setState({ alignment });
 
   render() {
     const { classes } = this.props;
@@ -39,8 +38,8 @@ class TVButton extends React.Component {
           <div className={classes.toggleContainer}>
             <ToggleButtonGroup value={formats} onChange={this.handleFormat}>
               <ToggleButton value="TV">
-                <Typography variant="caption">
-                    TV
+                <Typography variant='caption'>
+                  TV
                 </Typography>
               </ToggleButton>
             </ToggleButtonGroup>
@@ -51,8 +50,8 @@ class TVButton extends React.Component {
   }
 }
 
-TVButton.propTypes = {
+ToggleButtons.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(TVButton);
+export default withStyles(styles)(ToggleButtons);

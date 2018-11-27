@@ -2,18 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Slider from '@material-ui/lab/Slider';
+import Typography from '@material-ui/core/Typography';
 
 const styles = {
   root: {
-    display: 'flex',
-    height: 300,
+    width: 200,
   },
   slider: {
-    padding: '0px 22px',
+    padding: '22px 0px',
   },
 };
 
-class VerticalSlider extends React.Component {
+class horizontalSlider extends React.Component {
   state = {
     value: 50,
   };
@@ -32,21 +32,22 @@ class VerticalSlider extends React.Component {
 
     return (
       <div className={classes.root}>
+        <Typography id="label">Slider Label</Typography>
         <Slider
           classes={{ container: classes.slider }}
           value={value}
+          aria-labelledby="label"
           max={120}
           min={40}
           onChange={this.handleChange}
-          vertical
         />
       </div>
     );
   }
 }
 
-VerticalSlider.propTypes = {
+horizontalSlider.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(VerticalSlider);
+export default withStyles(styles)(horizontalSlider);

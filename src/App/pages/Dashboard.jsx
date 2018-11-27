@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import { withStyles } from '@material-ui/core/styles';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
 import CurrentTemps from '../components/Sheets/TempSheet';
 import TVButton from '../components/TVButton/TVButton';
 import LineChart from '../components/Chart/LineChart';
@@ -10,8 +7,6 @@ import FloorPlan from '../components/Dialogs/FloorPlan';
 import RoomPaper from '../components/Sheets/BasicSheet';
 import DoorButtons from '../components/DoorButton/DoorButtons';
 import './Style/Dashboard.css';
-
-
 
 class Dashboard extends Component {
 
@@ -72,6 +67,7 @@ class Dashboard extends Component {
         <div>
             <div className='top'>
                 <CurrentTemps temps = { temperatures }/>
+                <TempSlider thermo={thermo[0]}/>
                 {/* <LineChart data={ dashData } /> */}
                 
             </div>
@@ -82,7 +78,7 @@ class Dashboard extends Component {
                 <TVButton/>
               </div>
               <div className='right_side'>
-                <TempSlider thermo={thermo[0]}/>
+                
               </div>
             </div>
             
