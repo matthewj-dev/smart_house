@@ -36,7 +36,8 @@ class SimpleCard extends React.Component {
   getMonthBill = () => {
     fetch('/runningMonthlyPowerTotal')
     .then(res => res.json())
-    .then(MonBill => {this.setState({ MonBill: MonBill.toFixed(2) })});
+    .then(MonBill => {this.setState({ MonBill: MonBill.toFixed(2) })})
+    .catch(() => console.log('Financial :b:roke!'));
   }
 
   render() {
