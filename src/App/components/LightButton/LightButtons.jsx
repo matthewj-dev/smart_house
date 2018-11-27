@@ -39,17 +39,17 @@ class ToggleButtons extends React.Component {
             <ToggleButtonGroup value={formats} onChange={this.handleFormat}>
               <ToggleButton value="door_1">
                 <Typography variant='caption'>
-                  Door 1
+                  Light 1
                 </Typography>
               </ToggleButton>
               <ToggleButton value="door_2">
                 <Typography variant='caption'>
-                  Door 2
+                  Light 2
                 </Typography>
               </ToggleButton>
               <ToggleButton value="door_3">
                 <Typography variant='caption'>
-                  Door 3
+                  Light 3
                 </Typography>
               </ToggleButton>
             </ToggleButtonGroup>

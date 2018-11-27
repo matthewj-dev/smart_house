@@ -6,6 +6,8 @@ import TempSlider from '../components/TempSlider/TempSlider';
 import FloorPlan from '../components/Dialogs/FloorPlan';
 import RoomPaper from '../components/Sheets/BasicSheet';
 import DoorButtons from '../components/DoorButton/DoorButtons';
+import LightButtons from '../components/LightButton/LightButtons';
+import HeatButton from '../components/TempSlider/HVAC';
 import './Style/Dashboard.css';
 
 class Dashboard extends Component {
@@ -67,8 +69,15 @@ class Dashboard extends Component {
         <div>
             <div className='top'>
                 <CurrentTemps temps = { temperatures }/>
-                <TempSlider thermo={thermo[0]}/>
-                {/* <LineChart data={ dashData } /> */}
+                <div className='slider_area'>
+                  <div className = 'heat_button'>
+                    <HeatButton thermo={thermo[1]}/>
+                  </div>
+                  <div className='slider'>
+                    <TempSlider thermo={thermo[0]}/>
+                  </div>
+                </div>
+                <LineChart />
                 
             </div>
     
@@ -78,13 +87,15 @@ class Dashboard extends Component {
                 <TVButton/>
               </div>
               <div className='right_side'>
-                
+                <LightButtons/>
               </div>
             </div>
             
             <div className='bottom'>
               <FloorPlan/>
-              <DoorButtons/>
+              <div className='door_buttons'>
+                <DoorButtons/>
+              </div>
               <RoomPaper changeRoom = { this.changeRoom }/>
             </div>
           
@@ -92,22 +103,7 @@ class Dashboard extends Component {
         );
     } else {
     return (
-      <div>
-          <div>
-              <CurrentTemps temps = { temperatures }/>
-              {/* <LineChart data={ dashData } /> */}
-              <TVButton/>
-          </div>
-  
-          {/* try to use a table for this */}
-          
-          <div>
-            <FloorPlan/>
-            <DoorButtons/>
-            <RoomPaper changeRoom = { this.changeRoom }/>
-          </div>
-        
-      </div>
+      <div></div>
       );
     }
 

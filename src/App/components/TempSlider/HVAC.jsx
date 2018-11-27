@@ -22,34 +22,38 @@ class ToggleButtons extends React.Component {
   state = {
     alignment: 'left',
     formats: [''],
+    thermo: 'cool',
   };
 
-  handleFormat = (event, formats) => this.setState({ formats });
+  componentDidMount() {
+      this.setState({thermo: this.props.thermo});
+  }
+
+  handleChange = (event, formats) => {
+      this.setState({ formats })
+
+      if(this.state.thermo === 'heat'){
+          this.setState({thermo: 'cool'});
+      } else {
+          this.setState({thermo: 'heat'});
+      }
+
+    };
 
   handleAlignment = (event, alignment) => this.setState({ alignment });
 
   render() {
     const { classes } = this.props;
-    const { formats } = this.state;
+    const { formats, thermo } = this.state;
 
     return (
       <Grid container spacing={16}>
         <Grid item xs={12} sm={6}>
           <div className={classes.toggleContainer}>
-            <ToggleButtonGroup value={formats} onChange={this.handleFormat}>
-              <ToggleButton value="door_1">
+            <ToggleButtonGroup value={formats} onChange={this.handleChange}>
+              <ToggleButton value="HEAT" selected={false}>
                 <Typography variant='caption'>
-                  Door 1
-                </Typography>
-              </ToggleButton>
-              <ToggleButton value="door_2">
-                <Typography variant='caption'>
-                  Door 2
-                </Typography>
-              </ToggleButton>
-              <ToggleButton value="door_3">
-                <Typography variant='caption'>
-                  Door 3
+                  {thermo}
                 </Typography>
               </ToggleButton>
             </ToggleButtonGroup>
