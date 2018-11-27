@@ -14,7 +14,6 @@ const styles = theme => ({
     alignItems: 'center',
     justifyContent: 'flex-start',
     margin: `${theme.spacing.unit}px 0`,
-    background: theme.palette.background.default,
   },
 });
 

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withStyles } from '@material-ui/core/styles';
 import CurrentTemps from '../components/Sheets/TempSheet';
 import TVButton from '../components/TVButton/TVButton';
 import LineChart from '../components/Chart/LineChart';
@@ -6,6 +7,15 @@ import TempSlider from '../components/TempSlider/TempSlider';
 import FloorPlan from '../components/Dialogs/FloorPlan';
 import RoomPaper from '../components/Sheets/BasicSheet';
 import DoorButtons from '../components/DoorButton/DoorButtons';
+import './Style/Dashboard.css';
+
+const styles = theme => ({
+  root: {
+    ...theme.mixins.gutters(),
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
+  },
+});
 
 class Dashboard extends Component {
 
@@ -48,9 +58,6 @@ class Dashboard extends Component {
       //store object states
       this.setState({objects: dashData.objects});
 
-
-      
-
     }
   }
 
@@ -58,8 +65,6 @@ class Dashboard extends Component {
     this.setState({currentRoom});
 
   }
-
-  chan
 
   render() {
     var { temperatures, thermo } = this.state;
@@ -69,18 +74,23 @@ class Dashboard extends Component {
 
       return (
         <div>
-            <div>
+            <div className='top'>
                 <CurrentTemps temps = { temperatures }/>
                 {/* <LineChart data={ dashData } /> */}
-                <TVButton/>
+                
             </div>
     
             {/* try to use a table for this */}
-            <div>
-              <TempSlider thermo={thermo[0]}/>
+            <div className='middle'>
+              <div className='left_side'>
+                <TVButton/>
+              </div>
+              <div className='right_side'>
+                <TempSlider thermo={thermo[0]}/>
+              </div>
             </div>
             
-            <div>
+            <div className='bottom'>
               <FloorPlan/>
               <DoorButtons/>
               <RoomPaper changeRoom = { this.changeRoom }/>
@@ -113,4 +123,4 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+export default (Dashboard);

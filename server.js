@@ -6,7 +6,7 @@ const app = express();
 
 // by requiring the engine, we initialize and kick it off to
 // run
-// const dataGenEngine = require('./data_gen/engine');
+const dataGenEngine = require('./data_gen/engine');
 
 
 app.use(express.static(path.join(__dirname, "/public")));
