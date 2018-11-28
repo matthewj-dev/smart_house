@@ -19,6 +19,7 @@ class Dashboard extends Component {
     objects: [],
     currentRoom: '',
     thermo: [],
+    tv: {},
   };
 
   // get the data on reload
@@ -51,6 +52,9 @@ class Dashboard extends Component {
       //store object states
       this.setState({objects: dashData.objects});
 
+      // store tv state
+      this.setState({tv: dashData.objects['master bedroom'].tv});
+
     }
   }
 
@@ -59,9 +63,23 @@ class Dashboard extends Component {
 
   }
 
+  changeTVState = () => {
+    const otherParam = {
+      headers:{
+        "":""
+      },
+      body:1,
+      method:"POST"
+    };
+    fetch("/turnOn", otherParam)
+    .then(data=>{return data.json()})
+    .then(res=>{console.log(res)})
+    .catch(error=> {console.log(error)})
+
+  }
+
   render() {
-    var { temperatures, thermo } = this.state;
-    console.log(thermo);
+    var { temperatures, thermo, tv } = this.state;
 
     if(thermo.length) {
 
@@ -84,7 +102,7 @@ class Dashboard extends Component {
             {/* try to use a table for this */}
             <div className='middle'>
               <div className='left_side'>
-                <TVButton/>
+                <TVButton tv={tv} changeTVState={this.changeTVState}/>
               </div>
               <div className='right_side'>
                 <LightButtons/>

@@ -37,7 +37,6 @@ class Financial extends Component {
   // render the page components
   render() {
     var { data, cats } = this.state;
-    console.log(cats);
 
     if(data.length && cats.length){
       return (
