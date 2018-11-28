@@ -98,6 +98,7 @@ begin
       , 'inside', coalesce(i.val, 0)
       , 'outside', coalesce(o.val, 0)
       )
+      order by d
     )
     into strict _temp_graph
     from generate_series(date_trunc('hour', _now) - interval '30 days', date_trunc('hour', _now), interval '1 hour') d
@@ -105,14 +106,15 @@ begin
     on not i.is_outside_temp
     and i.temp_time = d
     left outer join temperature o
-    on i.is_outside_temp
-    and o.temp_time = i.temp_time
+    on o.is_outside_temp
+    and o.temp_time = d
     ;
 
     select json_build_object
     ( 'thermostat', json_build_object('setting', t.current_setting, 'heatOrCool', case t.heat when true then 'heat' else 'cool' end)
     , 'inside', _cur_inside
     , 'outside', _cur_outside
+    , 'graph', _temp_graph
     ) into strict _temp
     from thermostat t
     ;
