@@ -32,7 +32,7 @@ class horizontalSlider extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Typography id="label">TEMPERATURE(MIN 40F/MAX 120F)</Typography>
+        <Typography id="label">Temperature(MIN 40F/MAX 120F)</Typography>
         <Slider
           classes={{ container: classes.slider }}
           value={value}
