@@ -1,16 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Slider from '@material-ui/lab/Slider';
-import Typography from '@material-ui/core/Typography';
+import React from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import Slider from "@material-ui/lab/Slider";
+import Typography from "@material-ui/core/Typography";
 
 const styles = {
   root: {
-    width: 200,
+    width: 200
   },
   slider: {
-    padding: '22px 0px',
-  },
+    padding: "22px 0px"
+  }
 };
 
 class horizontalSlider extends React.Component {
@@ -19,7 +19,7 @@ class horizontalSlider extends React.Component {
   };
 
   componentDidMount() {
-    this.setState({value: this.props.thermo});
+    this.setState({ value: this.props.thermo });
   }
 
   handleChange = (event, value) => {
@@ -32,7 +32,7 @@ class horizontalSlider extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Typography id="label">Slider Label</Typography>
+        <Typography id="label">TEMPERATURE(MIN 40F/MAX 120F)</Typography>
         <Slider
           classes={{ container: classes.slider }}
           value={value}
@@ -47,7 +47,7 @@ class horizontalSlider extends React.Component {
 }
 
 horizontalSlider.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(horizontalSlider);
