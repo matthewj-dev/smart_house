@@ -15,7 +15,7 @@ const styles = {
 
 class horizontalSlider extends React.Component {
   state = {
-    value: 50,
+    value: 50
   };
 
   componentDidMount() {

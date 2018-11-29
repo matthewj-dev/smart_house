@@ -11,22 +11,31 @@ export default class FormDialog extends React.Component {
     super();
     this.state = {
       open: true,
-      password: ""
+      entered: "",
+      error: "",
+      password: "Admin"
     };
+    this.handleEnter = this.handleEnter.bind(this);
+    this.validate = this.validate.bind(this);
   }
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
-
+  //validation of user's entered password
   validate(t) {
-    if (t === "Admin") {
-      this.setState({ open: false });
+    t.preventDefault();
+
+    if (this.state.entered === this.state.password) {
+      return this.setState({ open: false });
     } else {
-      this.setState({ open: true });
+      return this.setState({ error: "Password Required" });
     }
   }
-
+  //changes entered password state and saves
+  handleEnter(t) {
+    this.setState({
+      entered: t.target.value
+    });
+  }
+  //Password = Admin
   render() {
     return (
       <div>
@@ -37,13 +46,18 @@ export default class FormDialog extends React.Component {
         >
           <DialogTitle id="form-dialog-title">Admin Login</DialogTitle>
           <DialogContent>
-            <TextField autoFocus margin="dense" label="Password" fullWidth />
+            <TextField
+              autoFocus
+              margin="dense"
+              label="Password"
+              onChange={this.handleEnter}
+              fullWidth
+            />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Cancel
+            <Button color="primary" onClick={this.validate}>
+              Submit
             </Button>
-            <Button color="primary" onClick={this.handleClose}>Submit</Button>
           </DialogActions>
         </Dialog>
       </div>

@@ -11,7 +11,6 @@ import HeatButton from '../components/TempSlider/HVAC';
 import './Style/Dashboard.css';
 
 class Dashboard extends Component {
-
   // set the object state with our data
   state = {
     dashData: null,
