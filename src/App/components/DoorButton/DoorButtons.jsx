@@ -29,7 +29,6 @@ class ToggleButtons extends React.Component {
   handleFormat = (event, formats) => {
     var {changeButtons} = this.props;
     var oldformats = this.state.formats;
-    var object = 1;
 
     if (discrete.difference(formats, oldformats).length) {
       if (discrete.difference(formats, oldformats)[0] === "door_1") {
@@ -37,7 +36,7 @@ class ToggleButtons extends React.Component {
       } else if (discrete.difference(formats, oldformats)[0] === "door_2") {
         changeButtons(false, 34);
       } else {
-        changeButtons(false, 33);
+        changeButtons(false, 18);
       }
     } else {
       if (discrete.difference(oldformats, formats)[0] === "door_1") {
@@ -45,12 +44,9 @@ class ToggleButtons extends React.Component {
       } else if (discrete.difference(oldformats, formats)[0] === "door_2") {
         changeButtons(true, 34);
       } else {
-        changeButtons(true, 33);
+        changeButtons(true, 18);
       }
     }
-
-    
-    
     this.setState({ formats })
   };
 
@@ -77,7 +73,7 @@ class ToggleButtons extends React.Component {
               </ToggleButton>
               <ToggleButton value="door_3">
                 <Typography variant='caption'>
-                  Door 3
+                  Garage Door
                 </Typography>
               </ToggleButton>
             </ToggleButtonGroup>

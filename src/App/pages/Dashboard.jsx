@@ -71,6 +71,8 @@ class Dashboard extends Component {
   // object: pass the object id
   changeObjState = (current, object) => {
     console.log(object);
+
+    // turn off if the object is on
     if (current) {
       const otherParam = {
         headers: {
@@ -83,6 +85,7 @@ class Dashboard extends Component {
         .then(res=>{console.log(res)})
         .catch(error=> {console.log(error)})
 
+    //turn on if object is off
     } else {
       const otherParam = {
       headers: {
@@ -127,7 +130,7 @@ class Dashboard extends Component {
                 <TVButton tv={tv} changeTVState={this.changeObjState} roomid={currentRoom} objects={objects}/>
               </div>
               <div className='right_side'>
-                <LightButtons/>
+                <LightButtons changeButtons={this.changeObjState} roomid={currentRoom}/>
               </div>
             </div>
             

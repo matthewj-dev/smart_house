@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import discrete from 'underscore';
 
 const styles = theme => ({
   toggleContainer: {
@@ -29,17 +30,24 @@ class ToggleButtons extends React.Component {
 
   handleFormat = (event, formats) => {
     var { changeTVState, tv, roomid, objects } = this.props;
-    
-    if (tv.status) {
-      TVState = true;
+    var oldformats = this.state.formats;
+
+    console.log(formats, oldformats);
+
+    if (roomid === "living room") {
+      if (discrete.difference(formats, oldformats).length) {
+        changeTVState(false, 23);
+      } else {
+        changeTVState(true, 23);
+      }
+
+      // bedroom tv
     } else {
-      TVState = false;
-    }
-    changeTVState(TVState, objects[roomid].tv.obj_id);
-    if (TVState === true) {
-      TVState = false;
-    } else {
-      TVState = true;
+      if (discrete.difference(formats, oldformats).length) {
+        changeTVState(false, 1);
+      } else {
+        changeTVState(true, 1);
+      }
     }
     this.setState({ formats })
     
