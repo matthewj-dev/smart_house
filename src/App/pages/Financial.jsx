@@ -45,7 +45,7 @@ class Financial extends Component {
           <PieChart cats={cats} />
           
           {/* pass the data into our template line chart */}
-          <LineChart data={ data } /> 
+          <LineChart data={ data } nameKey="name" dataKey={["bill"]}/> 
           <FinTable/>
           
         </div>

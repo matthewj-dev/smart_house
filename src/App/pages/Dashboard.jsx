@@ -19,6 +19,7 @@ class Dashboard extends Component {
     currentRoom: '',
     thermo: [],
     tv: {},
+    tempGraph: [],
   };
 
   // get the data on reload
@@ -42,17 +43,20 @@ class Dashboard extends Component {
       // store dashboard info
       this.setState({dashData});
 
-      //store temps
+      //s tore temps
       this.setState({temperatures: [dashData.temperature.inside, dashData.temperature.outside]});
 
-      //store thermostat state
-      this.setState({thermo: [dashData.temperature.thermostat.setting, dashData.temperature.thermostat.heatOrCool]})
+      // store thermostat state
+      this.setState({thermo: [dashData.temperature.thermostat.setting, dashData.temperature.thermostat.heatOrCool]});
 
-      //store object states
+      // store object states
       this.setState({objects: dashData.objects});
 
       // store tv state
       this.setState({tv: dashData.objects['master bedroom'].tv});
+
+      // store temp graph; last 12 hours
+      this.setState({tempGraph: dashData.temperature.graph.slice(-12)});
 
     }
   }
@@ -77,7 +81,7 @@ class Dashboard extends Component {
   }
 
   render() {
-    var { temperatures, thermo, tv } = this.state;
+    var { temperatures, thermo, tv, tempGraph } = this.state;
 
     if(thermo.length) {
 
@@ -93,7 +97,10 @@ class Dashboard extends Component {
                     <TempSlider thermo={thermo[0]}/>
                   </div>
                 </div>
-                <LineChart />
+                <div className='line_chart'>
+                  <LineChart data={tempGraph} nameKey="time" dataKey={["inside", "outside"]}/>
+                </div>
+                
                 
             </div>
     
