@@ -16,7 +16,7 @@ class Dashboard extends Component {
     dashData: null,
     temperatures: [],
     objects: [],
-    currentRoom: '',
+    currentRoom: 'master bedroom',
     thermo: [],
     tv: {},
     tempGraph: [],
@@ -66,22 +66,36 @@ class Dashboard extends Component {
 
   }
 
-  changeTVState = () => {
-    const otherParam = {
+  changeObjState = (current, object) => {
+    console.log(object);
+    if (current) {
+      const otherParam = {
+        headers: {
+            'content-type':"application/json"
+        },
+        body:JSON.stringify({objId: object}),
+        method:"POST",
+        };
+        fetch("/turnOff", otherParam)
+        .then(res=>{console.log(res)})
+        .catch(error=> {console.log(error)})
+
+    } else {
+      const otherParam = {
       headers: {
           'content-type':"application/json"
       },
-      body:JSON.stringify({objId: 1}),
+      body:JSON.stringify({objId: object}),
       method:"POST",
-    };
-    fetch("/turnOn", otherParam)
-    .then(res=>{console.log(res)})
-    .catch(error=> {console.log(error)})
-
+      };
+      fetch("/turnOn", otherParam)
+      .then(res=>{console.log(res)})
+      .catch(error=> {console.log(error)})
+    }
   }
 
   render() {
-    var { temperatures, thermo, tv, tempGraph } = this.state;
+    var { temperatures, thermo, tv, tempGraph, currentRoom, objects } = this.state;
 
     if(thermo.length) {
 
@@ -107,7 +121,7 @@ class Dashboard extends Component {
             {/* try to use a table for this */}
             <div className='middle'>
               <div className='left_side'>
-                <TVButton tv={tv} changeTVState={this.changeTVState}/>
+                <TVButton tv={tv} changeTVState={this.changeObjState} roomid={currentRoom} objects={objects}/>
               </div>
               <div className='right_side'>
                 <LightButtons/>

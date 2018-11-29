@@ -20,7 +20,7 @@ class SimpleLineChart extends React.Component {
 
   render() {
     var { data, nameKey, dataKey} = this.props;
-    console.log(dataKey);
+    
     var dataKeys = "";
     var dataKeysAlt = "";
     if (dataKey.length === 2) {
@@ -30,7 +30,6 @@ class SimpleLineChart extends React.Component {
       dataKeys = dataKey[0];
       dataKeysAlt = false;
     }
-    console.log(data);
 
     if ( dataKeysAlt ) {
       return (

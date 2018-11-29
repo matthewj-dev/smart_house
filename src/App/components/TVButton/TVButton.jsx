@@ -18,15 +18,29 @@ const styles = theme => ({
   },
 });
 
+var TVState = false;
+
 class ToggleButtons extends React.Component {
   state = {
     alignment: 'left',
     formats: [''],
+    TVState: false,
   };
 
   handleFormat = (event, formats) => {
-    var { changeTVState } = this.props;
-    changeTVState();
+    var { changeTVState, tv, roomid, objects } = this.props;
+    
+    if (tv.status) {
+      TVState = true;
+    } else {
+      TVState = false;
+    }
+    changeTVState(TVState, objects[roomid].tv.obj_id);
+    if (TVState === true) {
+      TVState = false;
+    } else {
+      TVState = true;
+    }
     this.setState({ formats })
     
   };
@@ -34,31 +48,35 @@ class ToggleButtons extends React.Component {
   handleAlignment = (event, alignment) => this.setState({ alignment });
 
   render() {
-    const { classes, tv } = this.props;
+    const { classes, tv, roomid } = this.props;
     const { formats } = this.state;
     var tvButtonStatus = "TV";
-    console.log(tv);
-    
+
     if (tv.status) {
       tvButtonStatus = "";
     }
-    
 
-    return (
-      <Grid container spacing={16}>
-        <Grid item xs={12} sm={6}>
-          <div className={classes.toggleContainer}>
-            <ToggleButtonGroup value={formats} onChange={this.handleFormat}>
-              <ToggleButton value={tvButtonStatus}>
-                <Typography variant='caption'>
-                  TV
-                </Typography>
-              </ToggleButton>
-            </ToggleButtonGroup>
-          </div>
-        </Grid>
-      </Grid>
-    );
+    if (roomid === "living room" || roomid === "master bedroom") {
+      return (
+            <Grid container spacing={16}>
+              <Grid item xs={12} sm={6}>
+                <div className={classes.toggleContainer}>
+                  <ToggleButtonGroup value={formats} onChange={this.handleFormat}>
+                    <ToggleButton value="{tvButtonStatus}">
+                      <Typography variant='caption'>
+                        TV
+                      </Typography>
+                    </ToggleButton>
+                  </ToggleButtonGroup>
+                </div>
+              </Grid>
+            </Grid>
+          );
+    } else {
+      return (<div></div>);
+    }
+
+    
   }
 }
 
