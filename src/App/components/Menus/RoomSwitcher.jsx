@@ -39,8 +39,12 @@ class RoomSwitcher extends React.Component {
   };
 
   // handle the click for each menu item
-  handleMenuItemClick = (event, index) => {
+  handleMenuItemClick = (event, index, changeRoom) => {
     this.setState({ selectedIndex: index, anchorEl: null });
+
+    // change state of dashboard room string to current room
+    changeRoom = this.props.changeRoom;
+    changeRoom(this.state.rooms[index]);
   };
 
   // close the menu
@@ -79,7 +83,6 @@ class RoomSwitcher extends React.Component {
           {rooms.map((option, index) => (
             <MenuItem
               key={option}
-              disabled={index === 0}
               selected={index === this.state.selectedIndex}
               onClick={event => this.handleMenuItemClick(event, index)}
             >

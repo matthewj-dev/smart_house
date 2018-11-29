@@ -1,13 +1,15 @@
-import React, { Component } from "react";
+import React from 'react';
 import "typeface-roboto";
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from "./components/Drawer/Drawer";
 
-class App extends Component {
+class App extends React.Component {
   render() {
     return (
-      <div>
+      <React.Fragment>
+        <CssBaseline />
         <Drawer/>
-      </div>
+      </React.Fragment>
     );
   }
 }

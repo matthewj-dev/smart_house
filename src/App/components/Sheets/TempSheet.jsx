@@ -14,7 +14,7 @@ const styles = theme => ({
   root: {
     width: '100%',
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
+    // backgroundColor: theme.palette.background.paper,
   },
 });
 
@@ -22,8 +22,8 @@ class InsetDividers extends React.Component {
 
     render() {
         const { classes } = this.props;
-        const insideTemp = 20;
-        const outsideTemp = 30;
+        const insideTemp = this.props.temps[0];
+        const outsideTemp = this.props.temps[1];
 
         return (
             <div className={classes.root}>

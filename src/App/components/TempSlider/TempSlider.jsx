@@ -1,24 +1,27 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-import Slider from "@material-ui/lab/Slider";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Slider from '@material-ui/lab/Slider';
+import Typography from '@material-ui/core/Typography';
 
 const styles = {
   root: {
-    display: "flex",
-    height: 200
+    width: 200,
   },
   slider: {
-    padding: "0px 22px"
-  }
+    padding: '22px 0px',
+  },
 };
 
-class TempSlider extends React.Component {
+class horizontalSlider extends React.Component {
   state = {
     value: 50
   };
 
-  // change the value of the object
+  componentDidMount() {
+    this.setState({value: this.props.thermo});
+  }
+
   handleChange = (event, value) => {
     this.setState({ value });
   };
@@ -29,20 +32,22 @@ class TempSlider extends React.Component {
 
     return (
       <div className={classes.root}>
+        <Typography id="label">Slider Label</Typography>
         <Slider
           classes={{ container: classes.slider }}
           value={value}
-          // handle changing the value of the object
+          aria-labelledby="label"
+          max={120}
+          min={40}
           onChange={this.handleChange}
-          vertical
         />
       </div>
     );
   }
 }
 
-TempSlider.propTypes = {
-  classes: PropTypes.object.isRequired
+horizontalSlider.propTypes = {
+  classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(TempSlider);
+export default withStyles(styles)(horizontalSlider);

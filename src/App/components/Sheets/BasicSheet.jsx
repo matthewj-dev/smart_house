@@ -15,12 +15,12 @@ const styles = theme => ({
 class PaperSheet extends React.Component {
 
   render() {
-    const { classes } = this.props;
+    const { classes, changeRoom } = this.props;
 
     return (
       <div>
-        <Paper className={classes.root} elevation={1}>
-          <RoomSelector />
+        <Paper className={classes.root} elevation={1} >
+          <RoomSelector changeRoom = { changeRoom } />
         </Paper>
       </div>
     );

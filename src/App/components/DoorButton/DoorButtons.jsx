@@ -18,17 +18,15 @@ const styles = theme => ({
   },
 });
 
-class DoorButtons extends React.Component {
+class ToggleButtons extends React.Component {
   state = {
     alignment: 'left',
-    formats: ['bold'],
+    formats: [''],
   };
 
-  // handle toggling bold 
-  handleFormat = (formats) => this.setState({ formats });
+  handleFormat = (event, formats) => this.setState({ formats });
 
-  // handle where the buttons align to
-  handleAlignment = (alignment) => this.setState({ alignment });
+  handleAlignment = (event, alignment) => this.setState({ alignment });
 
   render() {
     const { classes } = this.props;
@@ -39,19 +37,19 @@ class DoorButtons extends React.Component {
         <Grid item xs={12} sm={6}>
           <div className={classes.toggleContainer}>
             <ToggleButtonGroup value={formats} onChange={this.handleFormat}>
-              <ToggleButton value="doorOne">
-                <Typography variant="caption">
-                    Door 1
+              <ToggleButton value="door_1">
+                <Typography variant='caption'>
+                  Door 1
                 </Typography>
               </ToggleButton>
-              <ToggleButton value="doorTwo">
-                <Typography variant="caption">
-                    Door 2
+              <ToggleButton value="door_2">
+                <Typography variant='caption'>
+                  Door 2
                 </Typography>
               </ToggleButton>
-              <ToggleButton value="doorThree">
-                <Typography variant="caption">
-                    Door 3
+              <ToggleButton value="door_3">
+                <Typography variant='caption'>
+                  Door 3
                 </Typography>
               </ToggleButton>
             </ToggleButtonGroup>
@@ -62,8 +60,8 @@ class DoorButtons extends React.Component {
   }
 }
 
-DoorButtons.propTypes = {
+ToggleButtons.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(DoorButtons);
+export default withStyles(styles)(ToggleButtons);
