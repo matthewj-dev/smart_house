@@ -65,14 +65,13 @@ class Dashboard extends Component {
 
   changeTVState = () => {
     const otherParam = {
-      headers:{
-        "":""
+      headers: {
+          'content-type':"application/json"
       },
-      body:1,
-      method:"POST"
+      body:JSON.stringify({objId: 1}),
+      method:"POST",
     };
     fetch("/turnOn", otherParam)
-    .then(data=>{return data.json()})
     .then(res=>{console.log(res)})
     .catch(error=> {console.log(error)})
 

@@ -26,9 +26,9 @@ class ToggleButtons extends React.Component {
 
   handleFormat = (event, formats) => {
     var { changeTVState } = this.props;
-    console.log(changeTVState);
-    this.setState({ formats })
     changeTVState();
+    this.setState({ formats })
+    
   };
 
   handleAlignment = (event, alignment) => this.setState({ alignment });
@@ -37,6 +37,7 @@ class ToggleButtons extends React.Component {
     const { classes, tv } = this.props;
     const { formats } = this.state;
     var tvButtonStatus = "TV";
+    console.log(tv);
     
     if (tv.status) {
       tvButtonStatus = "";
