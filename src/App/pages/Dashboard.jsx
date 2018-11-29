@@ -66,6 +66,9 @@ class Dashboard extends Component {
 
   }
 
+  // pass function to components to change db state
+  // current: get the current state
+  // object: pass the object id
   changeObjState = (current, object) => {
     console.log(object);
     if (current) {
@@ -131,7 +134,7 @@ class Dashboard extends Component {
             <div className='bottom'>
               <FloorPlan/>
               <div className='door_buttons'>
-                <DoorButtons/>
+                <DoorButtons changeButtons={this.changeObjState}/>
               </div>
               <RoomPaper changeRoom = { this.changeRoom }/>
             </div>

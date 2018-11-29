@@ -5,6 +5,8 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import discrete from 'underscore';
+import { format } from 'util';
 
 const styles = theme => ({
   toggleContainer: {
@@ -24,7 +26,33 @@ class ToggleButtons extends React.Component {
     formats: [''],
   };
 
-  handleFormat = (event, formats) => this.setState({ formats });
+  handleFormat = (event, formats) => {
+    var {changeButtons} = this.props;
+    var oldformats = this.state.formats;
+    var object = 1;
+
+    if (discrete.difference(formats, oldformats).length) {
+      if (discrete.difference(formats, oldformats)[0] === "door_1") {
+        changeButtons(false, 35);
+      } else if (discrete.difference(formats, oldformats)[0] === "door_2") {
+        changeButtons(false, 34);
+      } else {
+        changeButtons(false, 33);
+      }
+    } else {
+      if (discrete.difference(oldformats, formats)[0] === "door_1") {
+        changeButtons(true, 35);
+      } else if (discrete.difference(oldformats, formats)[0] === "door_2") {
+        changeButtons(true, 34);
+      } else {
+        changeButtons(true, 33);
+      }
+    }
+
+    
+    
+    this.setState({ formats })
+  };
 
   handleAlignment = (event, alignment) => this.setState({ alignment });
 
