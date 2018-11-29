@@ -22,36 +22,38 @@ class ToggleButtons extends React.Component {
   state = {
     alignment: 'left',
     formats: [''],
+    thermo: 'cool',
   };
 
-  handleFormat = (event, formats) => {
-    var { changeTVState } = this.props;
-    changeTVState();
-    this.setState({ formats })
-    
-  };
+  componentDidMount() {
+      this.setState({thermo: this.props.thermo});
+  }
+
+  handleChange = (event, formats) => {
+      this.setState({ formats })
+
+      if(this.state.thermo === 'heat'){
+          this.setState({thermo: 'cool'});
+      } else {
+          this.setState({thermo: 'heat'});
+      }
+
+    };
 
   handleAlignment = (event, alignment) => this.setState({ alignment });
 
   render() {
-    const { classes, tv } = this.props;
-    const { formats } = this.state;
-    var tvButtonStatus = "TV";
-    console.log(tv);
-    
-    if (tv.status) {
-      tvButtonStatus = "";
-    }
-    
+    const { classes } = this.props;
+    const { formats, thermo } = this.state;
 
     return (
       <Grid container spacing={16}>
         <Grid item xs={12} sm={6}>
           <div className={classes.toggleContainer}>
-            <ToggleButtonGroup value={formats} onChange={this.handleFormat}>
-              <ToggleButton value={tvButtonStatus}>
+            <ToggleButtonGroup value={formats} onChange={this.handleChange}>
+              <ToggleButton value="HEAT" selected={false}>
                 <Typography variant='caption'>
-                  TV
+                  {thermo}
                 </Typography>
               </ToggleButton>
             </ToggleButtonGroup>

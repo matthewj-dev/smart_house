@@ -24,34 +24,32 @@ class ToggleButtons extends React.Component {
     formats: [''],
   };
 
-  handleFormat = (event, formats) => {
-    var { changeTVState } = this.props;
-    changeTVState();
-    this.setState({ formats })
-    
-  };
+  handleFormat = (event, formats) => this.setState({ formats });
 
   handleAlignment = (event, alignment) => this.setState({ alignment });
 
   render() {
-    const { classes, tv } = this.props;
+    const { classes } = this.props;
     const { formats } = this.state;
-    var tvButtonStatus = "TV";
-    console.log(tv);
-    
-    if (tv.status) {
-      tvButtonStatus = "";
-    }
-    
 
     return (
       <Grid container spacing={16}>
         <Grid item xs={12} sm={6}>
           <div className={classes.toggleContainer}>
             <ToggleButtonGroup value={formats} onChange={this.handleFormat}>
-              <ToggleButton value={tvButtonStatus}>
+              <ToggleButton value="door_1">
                 <Typography variant='caption'>
-                  TV
+                  Door 1
+                </Typography>
+              </ToggleButton>
+              <ToggleButton value="door_2">
+                <Typography variant='caption'>
+                  Door 2
+                </Typography>
+              </ToggleButton>
+              <ToggleButton value="door_3">
+                <Typography variant='caption'>
+                  Door 3
                 </Typography>
               </ToggleButton>
             </ToggleButtonGroup>

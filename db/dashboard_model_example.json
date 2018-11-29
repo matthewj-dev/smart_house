@@ -1,0 +1,52 @@
+{
+    "temperature": 
+    {
+        "inside": 70,
+        "outside": 80,
+        "thermostat":
+        {
+            "setting": 76,
+            "heatOrCool": "cool" 
+        },
+        "graph":
+        [
+            {
+                "time": "2018-10-10 06:00",
+                "inside": 52,
+                "outside": 36
+            },
+            {
+                "time": "2018-10-10 07:00",
+                "inside": 60,
+                "outside": 36
+            }
+        ]
+    },
+    "objects": 
+    {
+        "living room":
+        {
+            "overhead light":
+            {
+                "status": true,
+                "obj_id": 12
+            },
+            "tv":
+            {
+                "status": true,
+                "obj_id": 36
+            }
+        },
+        "master bedroom":
+        {
+            "overhead light": {
+                "status": true,
+                "obj_id": 12
+            },
+            "tv": {
+                "status": true,
+                "obj_id": 12
+            }
+        }
+    }
+}

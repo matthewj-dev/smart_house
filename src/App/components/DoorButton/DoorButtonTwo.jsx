@@ -3,7 +3,7 @@ import React from "react";
 const style = {
   position: "relative",
   display: "inline-block",
-  width: "33.3%",
+  width: "20%",
   float: "left",
   margin: "0 auto",
   marginTop: "200px",

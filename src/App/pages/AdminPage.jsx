@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import AdminDropdown from "../components/AdminDropdown/AdminDropdown";
+import Accordion from "../components/Accordion/Accordion";
+import AdminDialog from "../components/Dialogs/AdminDialog";
 
 class AdminPage extends Component {
   render() {
     return (
       <div>
-        <AdminDropdown />
+        <AdminDialog />
+        <Accordion />
       </div>
     );
   }

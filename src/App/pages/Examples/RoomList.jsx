@@ -12,6 +12,7 @@ class RoomList extends Component {
   // Fetch the list on first mount
   componentDidMount() {
     this.getList();
+    
   }
 
   // Retrieves the list of items from the Express app
@@ -19,10 +20,12 @@ class RoomList extends Component {
     fetch('/getRoomList')
     .then(res => res.json())
     .then(list => this.setState({ list }))
+    .catch(() => console.log("Whoops"));
   }
 
   render() {
     const { list } = this.state;
+
 
     return (
       <div className="App">
