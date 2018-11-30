@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import discrete from 'underscore';
 
 const styles = theme => ({
   toggleContainer: {
@@ -18,15 +19,36 @@ const styles = theme => ({
   },
 });
 
+var TVState = false;
+
 class ToggleButtons extends React.Component {
   state = {
     alignment: 'left',
     formats: [''],
+    TVState: false,
   };
 
   handleFormat = (event, formats) => {
-    var { changeTVState } = this.props;
-    changeTVState();
+    var { changeTVState, tv, roomid, objects } = this.props;
+    var oldformats = this.state.formats;
+
+    console.log(formats, oldformats);
+
+    if (roomid === "living room") {
+      if (discrete.difference(formats, oldformats).length) {
+        changeTVState(false, 23);
+      } else {
+        changeTVState(true, 23);
+      }
+
+      // bedroom tv
+    } else {
+      if (discrete.difference(formats, oldformats).length) {
+        changeTVState(false, 1);
+      } else {
+        changeTVState(true, 1);
+      }
+    }
     this.setState({ formats })
     
   };
@@ -34,31 +56,35 @@ class ToggleButtons extends React.Component {
   handleAlignment = (event, alignment) => this.setState({ alignment });
 
   render() {
-    const { classes, tv } = this.props;
+    const { classes, tv, roomid } = this.props;
     const { formats } = this.state;
     var tvButtonStatus = "TV";
-    console.log(tv);
-    
+
     if (tv.status) {
       tvButtonStatus = "";
     }
-    
 
-    return (
-      <Grid container spacing={16}>
-        <Grid item xs={12} sm={6}>
-          <div className={classes.toggleContainer}>
-            <ToggleButtonGroup value={formats} onChange={this.handleFormat}>
-              <ToggleButton value={tvButtonStatus}>
-                <Typography variant='caption'>
-                  TV
-                </Typography>
-              </ToggleButton>
-            </ToggleButtonGroup>
-          </div>
-        </Grid>
-      </Grid>
-    );
+    if (roomid === "living room" || roomid === "master bedroom") {
+      return (
+            <Grid container spacing={16}>
+              <Grid item xs={12} sm={6}>
+                <div className={classes.toggleContainer}>
+                  <ToggleButtonGroup value={formats} onChange={this.handleFormat}>
+                    <ToggleButton value="{tvButtonStatus}">
+                      <Typography variant='caption'>
+                        TV
+                      </Typography>
+                    </ToggleButton>
+                  </ToggleButtonGroup>
+                </div>
+              </Grid>
+            </Grid>
+          );
+    } else {
+      return (<div></div>);
+    }
+
+    
   }
 }
 

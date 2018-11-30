@@ -16,14 +16,18 @@ class Dashboard extends Component {
     dashData: null,
     temperatures: [],
     objects: [],
-    currentRoom: '',
+    currentRoom: 'master bedroom',
     thermo: [],
     tv: {},
+    tempGraph: [],
   };
 
   // get the data on reload
   componentDidMount() {
     this.getData();
+    setInterval(() => {
+      this.getData();
+    }, 3000);
   }
 
   // just example till I can get the deal data
@@ -42,17 +46,20 @@ class Dashboard extends Component {
       // store dashboard info
       this.setState({dashData});
 
-      //store temps
+      //s tore temps
       this.setState({temperatures: [dashData.temperature.inside, dashData.temperature.outside]});
 
-      //store thermostat state
-      this.setState({thermo: [dashData.temperature.thermostat.setting, dashData.temperature.thermostat.heatOrCool]})
+      // store thermostat state
+      this.setState({thermo: [dashData.temperature.thermostat.setting, dashData.temperature.thermostat.heatOrCool]});
 
-      //store object states
+      // store object states
       this.setState({objects: dashData.objects});
 
       // store tv state
       this.setState({tv: dashData.objects['master bedroom'].tv});
+
+      // store temp graph; last 12 hours
+      this.setState({tempGraph: dashData.temperature.graph.slice(-12)});
 
     }
   }
@@ -62,22 +69,42 @@ class Dashboard extends Component {
 
   }
 
-  changeTVState = () => {
-    const otherParam = {
+  // pass function to components to change db state
+  // current: get the current state
+  // object: pass the object id
+  changeObjState = (current, object) => {
+    console.log(object);
+
+    // turn off if the object is on
+    if (current) {
+      const otherParam = {
+        headers: {
+            'content-type':"application/json"
+        },
+        body:JSON.stringify({objId: object}),
+        method:"POST",
+        };
+        fetch("/turnOff", otherParam)
+        .then(res=>{console.log(res)})
+        .catch(error=> {console.log(error)})
+
+    //turn on if object is off
+    } else {
+      const otherParam = {
       headers: {
           'content-type':"application/json"
       },
-      body:JSON.stringify({objId: 1}),
+      body:JSON.stringify({objId: object}),
       method:"POST",
-    };
-    fetch("/turnOn", otherParam)
-    .then(res=>{console.log(res)})
-    .catch(error=> {console.log(error)})
-
+      };
+      fetch("/turnOn", otherParam)
+      .then(res=>{console.log(res)})
+      .catch(error=> {console.log(error)})
+    }
   }
 
   render() {
-    var { temperatures, thermo, tv } = this.state;
+    var { temperatures, thermo, tv, tempGraph, currentRoom, objects } = this.state;
 
     if(thermo.length) {
 
@@ -93,24 +120,27 @@ class Dashboard extends Component {
                     <TempSlider thermo={thermo[0]}/>
                   </div>
                 </div>
-                <LineChart />
+                <div className='line_chart'>
+                  <LineChart data={tempGraph} nameKey="time" dataKey={["inside", "outside"]}/>
+                </div>
+                
                 
             </div>
     
             {/* try to use a table for this */}
             <div className='middle'>
               <div className='left_side'>
-                <TVButton tv={tv} changeTVState={this.changeTVState}/>
+                <TVButton tv={tv} changeTVState={this.changeObjState} roomid={currentRoom} objects={objects}/>
               </div>
               <div className='right_side'>
-                <LightButtons/>
+                <LightButtons changeButtons={this.changeObjState} roomid={currentRoom}/>
               </div>
             </div>
             
             <div className='bottom'>
               <FloorPlan/>
               <div className='door_buttons'>
-                <DoorButtons/>
+                <DoorButtons changeButtons={this.changeObjState}/>
               </div>
               <RoomPaper changeRoom = { this.changeRoom }/>
             </div>

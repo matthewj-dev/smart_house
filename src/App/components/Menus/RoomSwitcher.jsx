@@ -19,7 +19,7 @@ class RoomSwitcher extends React.Component {
   // set state variables
   state = {
     anchorEl: null,
-    selectedIndex: 1,
+    selectedIndex: 0,
     rooms: ["master bedroom",
     "bedroom 2",
     "bedroom 3",

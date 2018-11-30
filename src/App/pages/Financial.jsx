@@ -10,12 +10,19 @@ class Financial extends Component {
   state = {
     data: [],
     cats: [],
+    finLog: [],
   };
 
   // when the page mounts call for the data
   componentDidMount() {
     this.getData();
     this.getCats();
+    this.getTable();
+
+    setInterval(() => {
+      this.getData();
+      this.getCats();
+    }, 3000);
 
   }
 
@@ -34,19 +41,26 @@ class Financial extends Component {
     .catch(() => console.log('Pie :b:roke!'));
   }
 
+  getTable = () => {
+    fetch('/expensesLog')
+    .then(res => res.json())
+    .then(finLog => {this.setState({finLog})})
+    .catch(() => console.log('table :b:roke'));
+  }
+
   // render the page components
   render() {
-    var { data, cats } = this.state;
+    var { data, cats, finLog } = this.state;
 
-    if(data.length && cats.length){
+    if(data.length && cats.length && finLog.length){
       return (
         <div>
           <TotalMonth />
           <PieChart cats={cats} />
           
           {/* pass the data into our template line chart */}
-          <LineChart data={ data } /> 
-          <FinTable/>
+          <LineChart data={ data } nameKey="name" dataKey={["bill"]}/> 
+          <FinTable tableData={finLog}/>
           
         </div>
         );
