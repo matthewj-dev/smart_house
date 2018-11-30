@@ -43,6 +43,13 @@ app.get("/getMonthlyBilling", (req, res) => {
   });
 });
 
+app.get("/expensesLog", (req, res) => {
+  db.expensesLog()
+  .then(model => {
+    res.json(model);
+  });
+});
+
 app.get("/adminPageModel", (req, res) => {
   db.adminPageModel()
   .then(model => {

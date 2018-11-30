@@ -99,7 +99,21 @@ module.exports = {
             client.connect();
             return (await client.query('select * from running_monthly_power_total($1::timestamptz) as total', [clock.now()])).rows[0].total;
         } catch(err) {
-            console.error(`Error retriving admin page data! ${err}`);
+            console.error(`Error retriving monthly total! ${err}`);
+            throw new Error(err);
+        } finally {
+            client.end();
+        }
+    },
+
+    expensesLog: async () => {
+        let client;
+        try {
+            client = new Client(connParams);
+            client.connect();
+            return (await client.query('select * from expenses_log($1::timestamptz) as model', [clock.now()])).rows[0].model;
+        } catch(err) {
+            console.error(`Error retriving expenses log! ${err}`);
             throw new Error(err);
         } finally {
             client.end();

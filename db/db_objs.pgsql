@@ -145,6 +145,35 @@ begin
 end;
 $$ language plpgsql stable;
 
+create or replace function expenses_log(_now timestamptz)
+returns json as 
+$$
+  select json_agg
+  (
+    x.model
+    order by x.time_used desc
+  ) as model
+  from
+  (
+    select json_build_object
+    ( 'id', row_number() over (order by ps.time_used desc)
+    , 'room_name', r.room_name
+    , 'object_name', o.obj_name
+    , 'time', to_char(ps.time_used, 'YYYY-MM-DD HH24:MI:SS')
+    , 'bill', (ps.watts/1000) * extract(epoch from ps.duration)/60/60
+    ) as model
+    , ps.time_used
+    from power_consumption ps
+    inner join obj o
+    on o.obj_id = ps.obj_id
+    and ps.time_used < _now
+    inner join room r
+    on r.room_id = o.room_id
+    limit 50
+  ) x
+  ;
+$$ language sql stable;
+
 create or replace function power_consumption_by_category(_now timestamptz)
 returns json as
 $$
