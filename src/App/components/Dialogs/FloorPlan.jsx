@@ -49,6 +49,8 @@ class FloorPlanPopup extends React.Component {
           onClose={this.handleClose}
           aria-labelledby="alert-dialog-slide-title"
           aria-describedby="alert-dialog-slide-description"
+          maxWidth='lg'
+          fullWidth={true}
         >
           <DialogTitle id="alert-dialog-slide-title">
             {"Floor Plan"}
