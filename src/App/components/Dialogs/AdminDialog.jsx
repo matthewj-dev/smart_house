@@ -52,6 +52,7 @@ export default class FormDialog extends React.Component {
               label="Password"
               onChange={this.handleEnter}
               fullWidth
+              type="password"
             />
           </DialogContent>
           <DialogActions>
