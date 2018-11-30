@@ -83,9 +83,9 @@ from
 , ('kitchen', 'overhead light', 'light'    ,   60, '4 hours'   , '2 hours'  , 1   , 2)
 , ('kitchen', 'stove'         , 'appliance', 3500, '15 minutes', '7 minutes', 1   , 2)
 , ('kitchen', 'oven'          , 'appliance', 4000, '15 minutes', '7 minutes', 3   , 4)
-, ('kitchen', 'microwave'     , 'applicance',  636, '10 minutes', '5 minutes', 2   , 3)
-, ('kitchen', 'refrigerator'  , 'applicance',  150, '24 hours'  , '0 minutes', 1   , 1) -- fridge is on 24/7
-, ('kitchen', 'dishwasher'    , 'applicance', 1800, '45 minutes', null       , 4, null) -- does not include hot water usage
+, ('kitchen', 'microwave'     , 'appliance',  636, '10 minutes', '5 minutes', 2   , 3)
+, ('kitchen', 'refrigerator'  , 'appliance',  150, '24 hours'  , '0 minutes', 1   , 1) -- fridge is on 24/7
+, ('kitchen', 'dishwasher'    , 'appliance', 1800, '45 minutes', null       , 4, null) -- does not include hot water usage
 ) o(room_name, obj_name, category, watts, duration, duration_deviation, weekday_frequency, weekend_frequency)
 inner join room r
 on r.room_name = o.room_name
