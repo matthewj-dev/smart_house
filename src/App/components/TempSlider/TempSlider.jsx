@@ -26,19 +26,21 @@ class horizontalSlider extends React.Component {
     var {changeThermo} = this.props;
     this.setState({ value });
     this.props.oldThermo[0] = value;
-    setTimeout(() => {
-      if(this.props.oldThermo[1] === "cool") {
-        changeThermo(value, false);
-      } else {
-        changeThermo(value, true);
-      }
-    }, 1000);
     
   };
 
+  sendValue = (event, value) => {
+    var {changeThermo} = this.props;
+    if(this.props.oldThermo[1] === "cool") {
+      changeThermo(value, false);
+    } else {
+      changeThermo(value, true);
+    }
+  };
+
   render() {
-    const { classes } = this.props;
-    const { value } = this.state;
+    const { classes} = this.props;
+    var { value } = this.state;
 
     return (
       <div className={classes.root}>
@@ -50,6 +52,7 @@ class horizontalSlider extends React.Component {
           max={120}
           min={40}
           onChange={this.handleChange}
+          onDragEnd={this.sendValue}
         />
       </div>
     );

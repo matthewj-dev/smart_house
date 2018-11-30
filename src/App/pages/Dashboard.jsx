@@ -20,6 +20,7 @@ class Dashboard extends Component {
     thermo: [],
     tv: [{status: false, obj_id: 1}, {status: false, obj_id: 23}],
     tempGraph: [],
+    doorState: [],
   };
 
   // get the data on reload
@@ -44,7 +45,6 @@ class Dashboard extends Component {
 
     //check null
     if(dashData) {
-      console.log(dashData);
       // store dashboard info
       this.setState({dashData});
 
@@ -63,6 +63,9 @@ class Dashboard extends Component {
       // store temp graph; last 12 hours
       this.setState({tempGraph: dashData.temperature.graph.slice(-12)});
 
+      // store door state
+      this.setState({doorState: [dashData.objects['outside']['front door'].status, dashData.objects['outside']['back door'].status, dashData.objects['garage']['door 1'].status]})
+
     }
   }
 
@@ -75,7 +78,6 @@ class Dashboard extends Component {
   // update thermo value with value: numeric degrees F
   // update HVAC state with heatState: bool heat: true, cool: false
   changeThermoState = (value, heatState) => {
-    console.log(value, heatState);
     const otherParam = {
       headers: {
           'content-type':"application/json"
@@ -92,6 +94,7 @@ class Dashboard extends Component {
   // current: get the current state
   // object: pass the object id
   changeObjState = (current, object) => {
+    console.log(object, current);
 
     // turn off if the object is on
     if (current) {
@@ -122,7 +125,7 @@ class Dashboard extends Component {
   }
 
   render() {
-    var { temperatures, thermo, tv, tempGraph, currentRoom, objects } = this.state;
+    var { temperatures, thermo, tv, tempGraph, currentRoom, objects, doorState } = this.state;
 
     if(thermo.length) {
 
@@ -158,7 +161,7 @@ class Dashboard extends Component {
             <div className='bottom'>
               <FloorPlan/>
               <div className='door_buttons'>
-                <DoorButtons changeButtons={this.changeObjState}/>
+                <DoorButtons changeButtons={this.changeObjState} doorState={doorState}/>
               </div>
               <RoomPaper changeRoom = { this.changeRoom }/>
             </div>
