@@ -10,13 +10,17 @@ import Paper from '@material-ui/core/Paper';
 
 const styles = theme => ({
   root: {
-    width: '100%',
+    display: 'flex',
     marginTop: theme.spacing.unit * 3,
-    overflowX: 'auto',
+    overflowX: 'hide',
   },
   table: {
-    minWidth: 700,
+    minWidth: 340,
   },
+  tableCell: {
+    paddingRight: 1,
+    paddingLeft: 3
+  }
 });
 
 let id = 0;
@@ -45,22 +49,22 @@ class SimpleTable extends React.Component {
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
-              <TableCell numeric>Room</TableCell>
-              <TableCell numeric>Appliance</TableCell>
-              <TableCell numeric>Event Time</TableCell>
-              <TableCell numeric>Cost</TableCell>
+              <TableCell className={classes.tableCell}>Room</TableCell>
+              <TableCell className={classes.tableCell} >Appliance</TableCell>
+              <TableCell className={classes.tableCell} numeric>Event Time</TableCell>
+              <TableCell className={classes.tableCell} numeric>Cost</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {tableData.map(row => {
               return (
                 <TableRow key={row.id}>
-                  <TableCell component="th" scope="row">
+                  <TableCell component="th" scope="row" className={classes.TableCell}>
                     {row.object_name}
                   </TableCell>
-                  <TableCell numeric>{row.room_name}</TableCell>
-                  <TableCell numeric>{row.time}</TableCell>
-                  <TableCell numeric>{row.bill}</TableCell>
+                  <TableCell className={classes.tableCell}>{row.room_name}</TableCell>
+                  <TableCell numeric className={classes.tableCell}>{row.time}</TableCell>
+                  <TableCell numeric className={classes.tableCell}>{row.bill.toFixed(2)}</TableCell>
                 </TableRow>
               );
             })}

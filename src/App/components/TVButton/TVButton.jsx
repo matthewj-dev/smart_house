@@ -28,11 +28,14 @@ class ToggleButtons extends React.Component {
     TVState: false,
   };
 
-  handleFormat = (event, formats) => {
-    var { changeTVState, tv, roomid, objects } = this.props;
-    var oldformats = this.state.formats;
+  componentDidMount() {
+    
 
-    console.log(formats, oldformats);
+  }
+
+  handleFormat = (event, formats) => {
+    var { changeTVState, roomid } = this.props;
+    var oldformats = this.state.formats;
 
     if (roomid === "living room") {
       if (discrete.difference(formats, oldformats).length) {
@@ -49,6 +52,7 @@ class ToggleButtons extends React.Component {
         changeTVState(true, 1);
       }
     }
+    // console.log(formats);
     this.setState({ formats })
     
   };
@@ -57,20 +61,24 @@ class ToggleButtons extends React.Component {
 
   render() {
     const { classes, tv, roomid } = this.props;
-    const { formats } = this.state;
+    const { formats, TVState } = this.state;
     var tvButtonStatus = "TV";
 
-    if (tv.status) {
-      tvButtonStatus = "";
-    }
+    // if (tv[0].status) {
+    //   tvButtonStatus = "";
+    // } else {
+    //   tvButtonStatus = "TV";
+    // }
 
-    if (roomid === "living room" || roomid === "master bedroom") {
+    // console.log(tv);
+
+    if (roomid === "living room") {
       return (
             <Grid container spacing={16}>
               <Grid item xs={12} sm={6}>
                 <div className={classes.toggleContainer}>
                   <ToggleButtonGroup value={formats} onChange={this.handleFormat}>
-                    <ToggleButton value="{tvButtonStatus}">
+                    <ToggleButton value={tvButtonStatus}>
                       <Typography variant='caption'>
                         TV
                       </Typography>
@@ -80,6 +88,22 @@ class ToggleButtons extends React.Component {
               </Grid>
             </Grid>
           );
+    } else if (roomid === "master bedroom") {
+      return (
+        <Grid container spacing={16}>
+          <Grid item xs={12} sm={6}>
+            <div className={classes.toggleContainer}>
+              <ToggleButtonGroup value={formats} onChange={this.handleFormat}>
+                <ToggleButton value={tvButtonStatus}>
+                  <Typography variant='caption'>
+                    TV
+                  </Typography>
+                </ToggleButton>
+              </ToggleButtonGroup>
+            </div>
+          </Grid>
+        </Grid>
+      );
     } else {
       return (<div></div>);
     }

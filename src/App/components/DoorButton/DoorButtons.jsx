@@ -30,6 +30,8 @@ class ToggleButtons extends React.Component {
     var {changeButtons} = this.props;
     var oldformats = this.state.formats;
 
+    console.log(formats, oldformats);
+
     if (discrete.difference(formats, oldformats).length) {
       if (discrete.difference(formats, oldformats)[0] === "door_1") {
         changeButtons(false, 35);
@@ -53,25 +55,39 @@ class ToggleButtons extends React.Component {
   handleAlignment = (event, alignment) => this.setState({ alignment });
 
   render() {
-    const { classes } = this.props;
+    const { classes, doorState } = this.props;
     const { formats } = this.state;
+    var doors = ["door_1", "door_2", "door_3"];
+
+    // if (doorState.length) {
+    //   for (var i = 0; i < doorState.length;i++) {
+    //     if (doorState[i]) {
+    //       doors[i] = '';
+    //     }
+    //   }
+    // }
+    
+
+    // console.log(doorState);
+
+    
 
     return (
       <Grid container spacing={16}>
         <Grid item xs={12} sm={6}>
           <div className={classes.toggleContainer}>
             <ToggleButtonGroup value={formats} onChange={this.handleFormat}>
-              <ToggleButton value="door_1">
+              <ToggleButton value={doors[0]}>
                 <Typography variant='caption'>
                   Door 1
                 </Typography>
               </ToggleButton>
-              <ToggleButton value="door_2">
+              <ToggleButton value={doors[1]}>
                 <Typography variant='caption'>
                   Door 2
                 </Typography>
               </ToggleButton>
-              <ToggleButton value="door_3">
+              <ToggleButton value={doors[2]}>
                 <Typography variant='caption'>
                   Garage Door
                 </Typography>

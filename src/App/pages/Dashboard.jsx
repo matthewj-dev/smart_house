@@ -18,8 +18,9 @@ class Dashboard extends Component {
     objects: [],
     currentRoom: 'master bedroom',
     thermo: [],
-    tv: {},
+    tv: [{status: false, obj_id: 1}, {status: false, obj_id: 23}],
     tempGraph: [],
+    doorState: [],
   };
 
   // get the data on reload
@@ -28,6 +29,7 @@ class Dashboard extends Component {
     setInterval(() => {
       this.getData();
     }, 3000);
+    
   }
 
   // just example till I can get the deal data
@@ -56,10 +58,13 @@ class Dashboard extends Component {
       this.setState({objects: dashData.objects});
 
       // store tv state
-      this.setState({tv: dashData.objects['master bedroom'].tv});
+      this.setState({tv: [dashData.objects['master bedroom'].tv, dashData.objects['living room'].tv]});
 
       // store temp graph; last 12 hours
       this.setState({tempGraph: dashData.temperature.graph.slice(-12)});
+
+      // store door state
+      this.setState({doorState: [dashData.objects['outside']['front door'].status, dashData.objects['outside']['back door'].status, dashData.objects['garage']['door 1'].status]})
 
     }
   }
@@ -69,11 +74,27 @@ class Dashboard extends Component {
 
   }
 
+  //
+  // update thermo value with value: numeric degrees F
+  // update HVAC state with heatState: bool heat: true, cool: false
+  changeThermoState = (value, heatState) => {
+    const otherParam = {
+      headers: {
+          'content-type':"application/json"
+      },
+      body:JSON.stringify({setting: value, heat: heatState}),
+      method:"POST",
+      };
+      fetch("/setThermostat", otherParam)
+      .then(res=>{console.log(res)})
+      .catch(error=> {console.log(error)})
+  }
+
   // pass function to components to change db state
   // current: get the current state
   // object: pass the object id
   changeObjState = (current, object) => {
-    console.log(object);
+    console.log(object, current);
 
     // turn off if the object is on
     if (current) {
@@ -104,7 +125,7 @@ class Dashboard extends Component {
   }
 
   render() {
-    var { temperatures, thermo, tv, tempGraph, currentRoom, objects } = this.state;
+    var { temperatures, thermo, tv, tempGraph, currentRoom, objects, doorState } = this.state;
 
     if(thermo.length) {
 
@@ -114,10 +135,10 @@ class Dashboard extends Component {
                 <CurrentTemps temps = { temperatures }/>
                 <div className='slider_area'>
                   <div className = 'heat_button'>
-                    <HeatButton thermo={thermo[1]}/>
+                    <HeatButton thermo={thermo[1]} oldThermo={thermo} changeThermo={this.changeThermoState}/>
                   </div>
                   <div className='slider'>
-                    <TempSlider thermo={thermo[0]}/>
+                    <TempSlider thermo={thermo[0]} oldThermo={thermo} changeThermo={this.changeThermoState}/>
                   </div>
                 </div>
                 <div className='line_chart'>
@@ -140,7 +161,7 @@ class Dashboard extends Component {
             <div className='bottom'>
               <FloorPlan/>
               <div className='door_buttons'>
-                <DoorButtons changeButtons={this.changeObjState}/>
+                <DoorButtons changeButtons={this.changeObjState} doorState={doorState}/>
               </div>
               <RoomPaper changeRoom = { this.changeRoom }/>
             </div>

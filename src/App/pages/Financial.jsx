@@ -3,6 +3,7 @@ import LineChart from '../components/Chart/LineChart';
 import FinTable from '../components/Tables/FinTable';
 import TotalMonth from '../components/Tile/TotMonthly';
 import PieChart from '../components/Chart/FinPieChart';
+import './Style/Dashboard.css'; // reuse dashboard css for time reasons
 
 class Financial extends Component {
 
@@ -55,12 +56,26 @@ class Financial extends Component {
     if(data.length && cats.length && finLog.length){
       return (
         <div>
-          <TotalMonth />
-          <PieChart cats={cats} />
-          
-          {/* pass the data into our template line chart */}
-          <LineChart data={ data } nameKey="name" dataKey={["bill"]}/> 
-          <FinTable tableData={finLog}/>
+          <div className='top'>
+            <div className='slider_area'>
+              <div className='heat_button'>
+                <TotalMonth />
+              </div>
+              <div className='slider'>
+                <PieChart cats={cats} />
+              </div>
+            </div>
+            <div className='line_chart'>
+               
+            </div>  
+          </div>
+          <div className='middle'>
+            {/* pass the data into our template line chart */}
+            <LineChart data={ data } nameKey="name" dataKey={["bill"]}/>
+          </div>
+          <div className='bottom'>
+            <FinTable tableData={finLog}/>
+          </div>
           
         </div>
         );

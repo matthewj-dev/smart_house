@@ -30,12 +30,17 @@ class ToggleButtons extends React.Component {
   }
 
   handleChange = (event, formats) => {
+      var {changeThermo} = this.props; 
       this.setState({ formats })
 
       if(this.state.thermo === 'heat'){
           this.setState({thermo: 'cool'});
+          this.props.oldThermo[1] = 'cool';
+          changeThermo(this.props.oldThermo[0], false);
       } else {
           this.setState({thermo: 'heat'});
+          this.props.oldThermo[1] = 'heat';
+          changeThermo(this.props.oldThermo[0], true);
       }
 
     };
