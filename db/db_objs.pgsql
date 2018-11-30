@@ -233,3 +233,49 @@ as $$
     and watts is not null
     ;
 $$ language sql volatile;
+
+create or replace function get_current_temperatures(_now timestamptz)
+returns json
+as $$
+declare
+  _cur_inside numeric;
+  _cur_outside numeric;
+begin
+with t as
+    (
+      select max(temp_time) latest
+      from temperature t
+      where not t.is_outside_temp
+      and temp_time < _now
+    )
+    select val
+    into strict _cur_inside
+    from temperature tmp
+    inner join t
+    on tmp.temp_time = t.latest
+    and not tmp.is_outside_temp
+    limit 1
+    ;
+
+    with t as
+    (
+      select max(temp_time) latest
+      from temperature t
+      where t.is_outside_temp
+      and temp_time < _now
+    )
+    select val
+    into strict _cur_outside
+    from temperature tmp
+    inner join t
+    on tmp.temp_time = t.latest
+    and tmp.is_outside_temp
+    limit 1
+    ;
+
+    return json_build_object
+    ( 'inside', _cur_inside
+    , 'outside', _cur_outside
+    );
+end;
+$$ language plpgsql stable;

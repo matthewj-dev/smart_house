@@ -119,6 +119,34 @@ module.exports = {
             client.end();
         }
     },
+
+    getCurrentTemperatures: async () => {
+        let client;
+        try {
+            client = new Client(connParams);
+            client.connect();
+            return (await client.query('select * from get_current_temperatures($1::timestamptz) as model', [clock.now()])).rows[0].model;
+        } catch(err) {
+            console.error(`Error retriving random event data! ${err}`);
+            throw new Error(err);
+        } finally {
+            client.end();
+        }
+    },
+
+    setInsideTemp: async (temp) => {
+        let client;
+        try {
+            client = new Client(connParams);
+            client.connect();
+            return (await client.query('insert into temperature (temp_time, is_outside_temp, val) values ($1::timestamptz, false, $2)', [clock.now(), temp]));
+        } catch(err) {
+            console.error(`Error retriving random event data! ${err}`);
+            throw new Error(err);
+        } finally {
+            client.end();
+        }
+    },
     
     randomEventsInfo: async () => {
         let client;
