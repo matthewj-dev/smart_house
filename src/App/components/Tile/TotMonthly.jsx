@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 
 const styles = {
   card: {
-    minWidth: 100
+    minWidth: 115
   },
   bullet: {
     display: "inline-block",
@@ -57,7 +57,7 @@ class SimpleCard extends React.Component {
             Monthly Bill
           </Typography>
           <Typography variant="h5" component="h2">
-            {MonBill}
+            $ {MonBill}
           </Typography>
         </CardContent>
       </Card>
