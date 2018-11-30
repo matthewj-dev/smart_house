@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 
 const styles = {
   root: {
-    width: 200
+    width: 180
   },
   slider: {
     padding: "22px 0px"
