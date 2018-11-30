@@ -28,7 +28,7 @@ class SimplePieChart extends React.Component {
 
 	render () {
         var { cats } = this.state;
-        console.log(cats);
+        // console.log(cats);
         
         return (
             <PieChart width={800} height={400} onMouseEnter={this.onPieEnter}>
