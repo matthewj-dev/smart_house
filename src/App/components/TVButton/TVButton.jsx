@@ -29,7 +29,7 @@ class ToggleButtons extends React.Component {
   };
 
   handleFormat = (event, formats) => {
-    var { changeTVState, tv, roomid, objects } = this.props;
+    var { changeTVState, roomid } = this.props;
     var oldformats = this.state.formats;
 
     console.log(formats, oldformats);
@@ -60,11 +60,11 @@ class ToggleButtons extends React.Component {
     const { formats } = this.state;
     var tvButtonStatus = "TV";
 
-    if (tv.status) {
-      tvButtonStatus = "";
-    }
+    if (roomid === "living room") {
 
-    if (roomid === "living room" || roomid === "master bedroom") {
+      if (tv[1].status) {
+        tvButtonStatus = "";
+      }
       return (
             <Grid container spacing={16}>
               <Grid item xs={12} sm={6}>
@@ -80,6 +80,25 @@ class ToggleButtons extends React.Component {
               </Grid>
             </Grid>
           );
+    } else if (roomid === "master bedroom") {
+      if (tv[0].status) {
+        tvButtonStatus = "";
+      }
+      return (
+        <Grid container spacing={16}>
+          <Grid item xs={12} sm={6}>
+            <div className={classes.toggleContainer}>
+              <ToggleButtonGroup value={formats} onChange={this.handleFormat}>
+                <ToggleButton value="{tvButtonStatus}">
+                  <Typography variant='caption'>
+                    TV
+                  </Typography>
+                </ToggleButton>
+              </ToggleButtonGroup>
+            </div>
+          </Grid>
+        </Grid>
+      );
     } else {
       return (<div></div>);
     }

@@ -23,7 +23,17 @@ class horizontalSlider extends React.Component {
   }
 
   handleChange = (event, value) => {
+    var {changeThermo} = this.props;
     this.setState({ value });
+    this.props.oldThermo[0] = value;
+    setTimeout(() => {
+      if(this.props.oldThermo[1] === "cool") {
+        changeThermo(value, false);
+      } else {
+        changeThermo(value, true);
+      }
+    }, 1000);
+    
   };
 
   render() {
