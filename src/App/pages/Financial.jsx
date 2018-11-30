@@ -17,6 +17,11 @@ class Financial extends Component {
     this.getData();
     this.getCats();
 
+    setInterval(() => {
+      this.getData();
+      this.getCats();
+    }, 3000);
+
   }
 
   // get the data from the server in json format

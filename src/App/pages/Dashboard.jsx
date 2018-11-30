@@ -25,6 +25,9 @@ class Dashboard extends Component {
   // get the data on reload
   componentDidMount() {
     this.getData();
+    setInterval(() => {
+      this.getData();
+    }, 3000);
   }
 
   // just example till I can get the deal data
