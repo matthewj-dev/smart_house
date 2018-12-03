@@ -15,7 +15,7 @@ const styles = {
 
 class horizontalSlider extends React.Component {
   state = {
-    value: 50
+    value: 70
   };
 
   componentDidMount() {
@@ -44,13 +44,13 @@ class horizontalSlider extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Typography id="label">Temperature (MIN 40F/MAX 120F)</Typography>
+        <Typography id="label">Temperature (MIN 50F/MAX 90F)</Typography>
         <Slider
           classes={{ container: classes.slider }}
           value={value}
           aria-labelledby="label"
-          max={120}
-          min={40}
+          max={90}
+          min={50}
           onChange={this.handleChange}
           onDragEnd={this.sendValue}
         />

@@ -18,10 +18,6 @@ import {
 } from 'react-router-dom';
 
 // our own components/data
-import Hello from '../../pages/Examples/HelloWorld';
-import myList from '../../pages/Examples/List';
-import RoomList from '../../pages/Examples/RoomList';
-import WelcomePage from '../../pages/Examples/WelcomeTest';
 import AdminPage from '../../pages/AdminPage';
 import Dashboard from '../../pages/Dashboard';
 import FinancialPage from '../../pages/Financial';
@@ -31,15 +27,6 @@ import FinancialPage from '../../pages/Financial';
 const drawerWidth = 240;
 
 window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
-
-// try this
-// Option 1)
-// #ccccff for menu bar
-// #dddddd for background
-
-// Option 2(possible Night Mode)
-// #66ccff for menu bar
-// #444444 for background
 
 const styles = theme => ({
   root: {
@@ -148,11 +135,7 @@ class ResponsiveDrawer extends React.Component {
                     <Switch>
                         <Route exact path="/" component={Dashboard} />
                         <Route path='/financial' component={FinancialPage} />
-                        <Route path='/list' component={myList} />
-                        <Route path='/roomList' component={RoomList} />
                         <Route path='/adminPage' component={AdminPage} />
-                        <Route path='/test' component={WelcomePage} />
-                        <Route path='/hello' component={Hello} />
                     </Switch>
                     </HashRouter>
                 </div>
