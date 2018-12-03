@@ -30,7 +30,7 @@ class ToggleButtons extends React.Component {
     var {changeButtons} = this.props;
     var oldformats = this.state.formats;
 
-    console.log(formats, oldformats);
+    // console.log(formats, oldformats);
 
     if (discrete.difference(formats, oldformats).length) {
       if (discrete.difference(formats, oldformats)[0] === "door_1") {
@@ -58,17 +58,6 @@ class ToggleButtons extends React.Component {
     const { classes, doorState } = this.props;
     const { formats } = this.state;
     var doors = ["door_1", "door_2", "door_3"];
-
-    // if (doorState.length) {
-    //   for (var i = 0; i < doorState.length;i++) {
-    //     if (doorState[i]) {
-    //       doors[i] = '';
-    //     }
-    //   }
-    // }
-    
-
-    // console.log(doorState);
 
     
 
