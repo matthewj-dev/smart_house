@@ -1,10 +1,10 @@
 # Capstone Project
 ### Branwin, Jared, Joel, Hayden, and Matt
-* [Joel Vance](bamafever615@gmail.com)
-* [Jared Chesnut ](red.chesnut@yahoo.com)
-* [Hayden Barbazette](hayden.barbazette@gmail.com)
-* [Branwin DuBose](branwindubose@gmail.com)
-* [Matthew Jackson](mjacks36@outlook.com)
+* [Joel Vance](mailto:bamafever615+smarthome@gmail.com)
+* [Jared Chesnut ](mailto:red.chesnut@yahoo.com)
+* [Hayden Barbazette](mailto:hayden.barbazette+smarthome@gmail.com)
+* [Branwin DuBose](mailto:branwindubose+smarthome@gmail.com)
+* [Matthew Jackson](mailto:jacksonmatt1024+smarthome@gmail.com)
 
 # How to Set Up 
 This only needs to be run once to set up your environment.
